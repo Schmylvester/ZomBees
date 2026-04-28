@@ -34,7 +34,17 @@ public class Cell : MonoBehaviour
 
     private void Update()
     {
-        m_renderer.color = (m_highlightedCell == this || m_neighbours.Find(n => n == m_highlightedCell)) ? Color.Lerp(m_defaultColour, Color.white, 0.6f) : m_defaultColour;
+        if (m_highlightedCell == this)
+        {
+            m_renderer.color = Color.Lerp(m_defaultColour, Color.green, 0.6f);
+        } else if (m_neighbours.Find(n => n == m_highlightedCell))
+        {
+            m_renderer.color = Color.Lerp(m_defaultColour, Color.blue, 0.6f);
+        }
+        else
+        {
+            m_renderer.color = m_defaultColour;
+        }
         RaycastHit2D hit = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue()));
         if (hit.collider != null)
         {
