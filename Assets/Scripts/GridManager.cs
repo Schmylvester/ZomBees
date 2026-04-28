@@ -16,7 +16,6 @@ public class GridManager : MonoBehaviour
         m_grid = GetComponent<Grid>();
 
         var xBuffer = (((m_gridSize * 2) + 1) - ((m_baseSize * 2) + 1)) / 2;
-        Debug.Log(xBuffer);
         for (int y = -m_gridSize; y < m_gridSize + 1; ++y)
         {
             // calculate width of the current row
@@ -33,6 +32,11 @@ public class GridManager : MonoBehaviour
                     if (Mathf.Abs(y) <= m_baseSize && x >= xBuffer && x < width - xBuffer)
                     {
                         cell.setBase();
+                    }
+                    var neighbour = m_cells.Find(c => c.gameObject.name == ((y - 1).ToString() + "." + x));
+                    if (neighbour)
+                    {
+                        neighbour.setNeighbour(cell, true);
                     }
                 }
             }

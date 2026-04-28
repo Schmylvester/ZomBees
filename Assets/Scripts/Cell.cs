@@ -1,15 +1,20 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(SpriteRenderer))]
 public class Cell : MonoBehaviour
 {
-    Renderer m_renderer;
+    SpriteRenderer m_renderer;
     bool m_isBase = false;
     List<Cell> m_neighbours = new();
+    Color m_defaultColour;
+    static Cell m_highlightedCell;
 
     private void Awake()
     {
-        m_renderer = GetComponent<Renderer>();
+        m_renderer = GetComponent<SpriteRenderer>();
+        m_defaultColour = m_renderer.color;
     }
 
     public List<Cell> getNeighbours() { return m_neighbours; }
@@ -23,6 +28,19 @@ public class Cell : MonoBehaviour
 
     public void setBase() {
         m_isBase = true;
-        m_renderer.materials[0].color = Color.red;
+        m_renderer.color = Color.red;
+        m_defaultColour = m_renderer.color;
+    }
+
+    private void Update()
+    {
+        m_renderer.color = (m_highlightedCell == this || m_neighbours.Find(n => n == m_highlightedCell)) ? Color.Lerp(m_defaultColour, Color.white, 0.6f) : m_defaultColour;
+        RaycastHit2D hit = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue()));
+        if (hit.collider != null)
+        {
+            if (hit.collider.gameObject == gameObject) {
+                m_highlightedCell = this;
+            }
+        }
     }
 }
