@@ -1,9 +1,11 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.InputSystem;
 
 public class GridManager : MonoBehaviour
 {
     [SerializeField] GameObject m_cellObject;
+    [SerializeField] Pathfinder m_pathfinder;
     /** grid size is determined by how many cells the center is from the edge */
     [SerializeField] int m_gridSize;
     [SerializeField] int m_baseSize;
@@ -41,9 +43,6 @@ public class GridManager : MonoBehaviour
 
     void assignNeighbours()
     {
-        // quadratic equation to find the cell count based on grid size
-        // finding the middle cell will help us mirror the calculations
-        var middleCellIndex = ((3 * Mathf.Pow(m_gridSize, 2)) + (3 * m_gridSize)) / 2;
         for (int i = 1; i < m_cells.Count; ++i) {
             var cellCoords = m_cells[i].gameObject.name.Split('.');
             var y = int.Parse(cellCoords[0]);
@@ -54,6 +53,22 @@ public class GridManager : MonoBehaviour
             if (bottomLeftNeighbour) { m_cells[i].setNeighbour(bottomLeftNeighbour, true); }
             var bottomRightNeighbour = m_cells.Find(c => c.name == (y - 1) + "." + (y <= 0 ? x : x + 1));
             if (bottomRightNeighbour) { m_cells[i].setNeighbour(bottomRightNeighbour, true); }
+        }
+    }
+
+    private void Update()
+    {
+        RaycastHit2D hit = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue()));
+        if (hit.collider != null)
+        {
+            if (m_cells.Find(c => hit.collider.gameObject == c.gameObject))
+            {
+                var path = m_pathfinder.findPath(hit.collider.gameObject.GetComponent<Cell>(), TargetType.Base);
+                foreach (var node in path)
+                {
+                    node.highlight();
+                }
+            }
         }
     }
 }
