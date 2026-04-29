@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 7835630656947074272}
   - component: {fileID: 4898461060163618888}
   - component: {fileID: 3837507620814470872}
+  - component: {fileID: 6636590457823606539}
   m_Layer: 0
-  m_Name: Hexagon
+  m_Name: Cell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -159,3 +160,16 @@ PolygonCollider2D:
       - {x: 0.0015729177, y: -0.1876418}
       - {x: 0.18668862, y: -0.099027224}
   m_UseDelaunayMesh: 1
+--- !u!114 &6636590457823606539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6841442451829236354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c1d822edfbb05c41a8e4b7c8d0f5fef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CellInfo
+  m_cell: {fileID: 7835630656947074272}

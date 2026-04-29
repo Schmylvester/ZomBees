@@ -1,13 +1,15 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class EnemySpawner : MonoBehaviour
+public class EnemyManager : MonoBehaviour
 {
     [SerializeField] GameObject m_enemyPrefab = null;
     [SerializeField] GridManager m_gridManager = null;
     [SerializeField] Pathfinder m_pathfinder = null;
     [SerializeField] int m_enemyCount = 1;
     List<Enemy> m_enemies = new();
+    public List<Enemy> enemies { get { return m_enemies; } }
+
     void Update()
     {
         for (int i = 0; i < m_enemyCount; ++i) {
