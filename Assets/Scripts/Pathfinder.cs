@@ -36,25 +36,32 @@ public class Pathfinder : MonoBehaviour
                         path.Add(cell);
                         cell = closedList.Find(c => c.current == cell).previous;
                     } while (cell != null);
+                    path.Reverse();
                     return path;
                 }
             }
 
-            var neighbours = workingCandidate.current.getNeighbours();
-            var filter_a = neighbours.Where(n => n.accessible);
-            var filter_b = filter_a.Where(n => openList.FindIndex(i => i.current == n) == -1);
-            var filter_c = filter_b.Where(n => closedList.FindIndex(i => i.current == n) == -1);
+            var neighbours = workingCandidate.current.getNeighbours()
+                // remove inaccessible nodes
+                .Where(n => n.accessible)
+                // remove anything we are already going to check
+                .Where(n => openList.FindIndex(i => i.current == n) == -1)
+                // remove anything we already checked
+                .Where(n => closedList.FindIndex(i => i.current == n) == -1)
+                // add neighbours in a random order so that equidistant paths are not prioritised by order in the array
+                .OrderBy(x => Random.value);
 
-            foreach (var neighbour in filter_c) {
+
+            foreach (var neighbour in neighbours) {
                 openList.Add(new PathNode { current = neighbour, previous = workingCandidate.current, distanceFromOrigin = workingCandidate.distanceFromOrigin + 1 });
             }
 
             if (openList.Count == 0)
             {
-                throw new System.Exception("Broken loop");
+                return new();
             }
 
-            openList.Sort((PathNode a, PathNode b) => { return a.distanceFromOrigin - b.distanceFromOrigin; });
+            openList.Sort((a, b) => a.distanceFromOrigin.CompareTo(b.distanceFromOrigin));
             workingCandidate = openList[0];
         }
     }
