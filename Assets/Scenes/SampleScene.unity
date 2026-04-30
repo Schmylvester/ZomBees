@@ -534,11 +534,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1863228568343356409, guid: 37f193d5e5492114d99fe965c853033c, type: 3}
       propertyPath: m_range
-      value: 1
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 1863228568343356409, guid: 37f193d5e5492114d99fe965c853033c, type: 3}
       propertyPath: m_damage
       value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 1863228568343356409, guid: 37f193d5e5492114d99fe965c853033c, type: 3}
+      propertyPath: m_fireRate
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2017528946165654814, guid: 37f193d5e5492114d99fe965c853033c, type: 3}
       propertyPath: m_Name
@@ -651,6 +655,7 @@ MonoBehaviour:
   m_pathfinder: {fileID: 1098425203}
   m_gridSize: 10
   m_baseSize: 1
+  m_grid: {fileID: 1098425201}
 --- !u!114 &1098425203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1349,6 +1354,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1899345954}
   m_CullTransparentMesh: 1
+--- !u!1 &1974761043
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1974761044}
+  - component: {fileID: 1974761045}
+  m_Layer: 0
+  m_Name: InputManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1974761044
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1974761043}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1974761045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1974761043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b8f9212cef68c941bf9be2dc0b57bc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InputHandler
+  m_gridManager: {fileID: 1098425202}
 --- !u!1 &2016307589
 GameObject:
   m_ObjectHideFlags: 0
@@ -1588,3 +1638,4 @@ SceneRoots:
   - {fileID: 1736882685}
   - {fileID: 2147084619}
   - {fileID: 906841293}
+  - {fileID: 1974761044}

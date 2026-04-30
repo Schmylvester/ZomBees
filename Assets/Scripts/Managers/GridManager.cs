@@ -10,15 +10,13 @@ public class GridManager : MonoBehaviour
     [SerializeField] int m_gridSize;
     [SerializeField] int m_baseSize;
 
-    Grid m_grid;
+    [SerializeField] Grid m_grid;
     List<Cell> m_cells = new();
+    public List<Cell> cells {  get { return m_cells; } }
     List<Cell> m_edgeCells = new();
-    Cell m_hoveredCell = null;
 
     void Awake()
     {
-        m_grid = GetComponent<Grid>();
-
         var xBuffer = (((m_gridSize * 2) + 1) - ((m_baseSize * 2) + 1)) / 2;
         for (int y = -m_gridSize; y < m_gridSize + 1; ++y)
         {
@@ -51,25 +49,6 @@ public class GridManager : MonoBehaviour
             if (cell.isEdge())
             {
                 m_edgeCells.Add(cell);
-            }
-        }
-    }
-
-    private void Update()
-    {
-        if (m_hoveredCell)
-        {
-            m_hoveredCell.removeHighlight();
-            m_hoveredCell = null;
-        }
-        RaycastHit2D hit = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue()));
-        if (hit.collider != null)
-        {
-            if (m_cells.Find(c => hit.collider.gameObject == c.gameObject))
-            {
-                var cell = hit.collider.GetComponent<Cell>();
-                m_hoveredCell = cell;
-                m_hoveredCell.addHighlight(Color.green, 0.5f);
             }
         }
     }

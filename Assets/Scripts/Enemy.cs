@@ -20,7 +20,8 @@ public class Enemy : MonoBehaviour
     {
         var canvas = FindAnyObjectByType<Canvas>();
         m_healthBar = Instantiate(m_healthBarPrefab, canvas.transform).transform;
-        m_healthBar.localScale = new Vector3(0.1f, 0.4f, 1f);
+        m_healthBar.localScale = new Vector3(0.05f, 0.4f);
+        m_healthBar.transform.position = Camera.main.WorldToScreenPoint(transform.position) + (Vector3.up * 20);
         m_healthManager = m_healthBar.GetComponent<HealthManager>();
         m_healthManager.onHealthEmpty += () => m_markedForDeath = true;
     }
@@ -32,7 +33,7 @@ public class Enemy : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        m_healthBar.transform.position = Camera.main.WorldToScreenPoint(transform.position);
+        m_healthBar.transform.position = Camera.main.WorldToScreenPoint(transform.position) + (Vector3.up * 20);
         if (m_path.Count == 0)
         {
             return;

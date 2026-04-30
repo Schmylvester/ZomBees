@@ -22,9 +22,12 @@ public class Tower : MonoBehaviour
                     var bDist = Vector3.Distance(transform.position, b.transform.position);
                     return aDist < bDist ? -1 : 1;
                  });
-                if (Vector3.Distance(enemies[0].transform.position, transform.position) <= m_range)
+                if (enemies[0])
                 {
-                    m_targetEnemy = enemies[0];
+                    if (Vector3.Distance(enemies[0].transform.position, transform.position) <= m_range)
+                    {
+                        m_targetEnemy = enemies[0];
+                    }
                 }
             }
         }
