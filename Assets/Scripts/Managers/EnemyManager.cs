@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 public class EnemyManager : MonoBehaviour
 {
+    [SerializeField] IEnemyStats[] m_stats;
     [SerializeField] GameObject m_enemyPrefab = null;
     [SerializeField] GridManager m_gridManager = null;
     [SerializeField] Pathfinder m_pathfinder = null;
@@ -20,6 +21,7 @@ public class EnemyManager : MonoBehaviour
             if (!m_enemies[i])
             {
                 m_enemies[i] = Instantiate(m_enemyPrefab, transform).GetComponent<Enemy>();
+                m_enemies[i].initStats(m_stats[Random.Range(0, m_stats.Length)]);
 
                 Cell spawnCell = null;
                 var loopBreaker = 0;

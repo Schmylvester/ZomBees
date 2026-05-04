@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
     public EnemyManager enemyManager {  get { return m_enemyManager; } }
     [SerializeField] HealthManager m_playerHealthManager;
     public HealthManager playerHealthManager { get { return m_playerHealthManager; } }
+    [SerializeField] SpriteManager m_spriteManager;
+    public SpriteManager spriteManager {  get { return m_spriteManager; } }
 
     private void Awake()
     {

@@ -7,7 +7,7 @@ public class CellInfo : Info
     {
         if (m_cell.tower)
         {
-            return "There is a tower here";
+            return m_cell.tower.getTowerInfo();
         }
         if (!m_cell.accessible)
         {

@@ -1,16 +1,33 @@
 using UnityEngine;
 
+[System.Serializable]
+public struct ITowerStats
+{
+    public string description;
+    public float range;
+    public float fireRate;
+    public int power;
+    public int spriteIndex;
+}
+
 public class Tower : MonoBehaviour
 {
+    [SerializeField] SpriteRenderer m_spriteRenderer;
     [SerializeField] SpriteRenderer m_rangeIndicator;
-    [SerializeField] float m_range;
-    [SerializeField] float m_fireRate;
-    [SerializeField] int m_damage;
+    [SerializeField] Projectile m_projectile;
+    ITowerStats m_stats;
     float m_lastFire = 0f;
     Enemy m_targetEnemy = null;
+    // the range indicator sprite needs to be scaled by this much to match up with the tower range
+    float m_rangeScale = 28f;
+    bool m_active = false;
 
     void Update()
     {
+        if (!m_active)
+        {
+            return;
+        }
         if (m_targetEnemy == null)
         {
             var enemies = GameManager.instance.enemyManager.enemies;
@@ -26,7 +43,7 @@ public class Tower : MonoBehaviour
                 });
                 if (enemies[0])
                 {
-                    if (Vector3.Distance(enemies[0].transform.position, transform.position) <= m_range)
+                    if (Vector3.Distance(enemies[0].transform.position, transform.position) <= m_stats.range)
                     {
                         m_targetEnemy = enemies[0];
                     }
@@ -36,12 +53,29 @@ public class Tower : MonoBehaviour
         m_lastFire += Time.deltaTime;
         if (m_targetEnemy)
         {
-            if (m_lastFire >= 1f / m_fireRate)
+            if (m_lastFire >= 1f / m_stats.fireRate)
             {
-                m_targetEnemy.takeDamage(m_damage);
+                StartCoroutine(m_projectile.fire(m_targetEnemy.transform));
+                m_targetEnemy.takeDamage(m_stats.power);
                 m_lastFire = 0;
             }
         }
+    }
+
+    public void initTowerStats(ITowerStats _stats)
+    {
+        m_stats = _stats;
+        m_spriteRenderer.sprite = GameManager.instance.spriteManager.getTowerSprite(m_stats.spriteIndex);
+    }
+
+    public void setActive()
+    {
+        m_active = true;
+    }
+
+    public string getTowerInfo()
+    {
+        return m_stats.description;
     }
 
     public void addHighlight()
@@ -49,7 +83,7 @@ public class Tower : MonoBehaviour
         if (m_rangeIndicator)
         {
             m_rangeIndicator.enabled = true;
-            m_rangeIndicator.transform.localScale = m_range * 4 * Vector3.one;
+            m_rangeIndicator.transform.localScale = m_stats.range * m_rangeScale * Vector3.one;
         }
     }
 

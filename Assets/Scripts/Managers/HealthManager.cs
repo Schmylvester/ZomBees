@@ -35,4 +35,10 @@ public class HealthManager : MonoBehaviour
             onHealthEmpty?.Invoke();
         }
     }
+
+    public void setInitHealth(int _health)
+    {
+        m_totalHealth = _health;
+        m_currentHealth = _health;
+    }
 }

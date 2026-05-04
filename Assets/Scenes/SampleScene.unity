@@ -163,6 +163,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89881f2b3317b484db68f5bc625b1e5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TowerManager
+  m_info:
+  - {fileID: 1523017355}
+  - {fileID: 2016307594}
+  - {fileID: 1899345959}
+  m_preparedTowers:
+  - description: Pretty standard tower
+    range: 2
+    fireRate: 1
+    power: 40
+    spriteIndex: 0
+  - description: Fires slowly but hits hard
+    range: 1.5
+    fireRate: 0.4
+    power: 150
+    spriteIndex: 1
+  - description: Fires fast and far
+    range: 3
+    fireRate: 2
+    power: 25
+    spriteIndex: 2
   m_towerPrefab: {fileID: 2017528946165654814, guid: 37f193d5e5492114d99fe965c853033c, type: 3}
 --- !u!1 &307189516
 GameObject:
@@ -569,6 +589,57 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1006765117
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1006765118}
+  - component: {fileID: 1006765119}
+  m_Layer: 0
+  m_Name: SpriteManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1006765118
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1006765117}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1006765119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1006765117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fbc5fced307c2a4ea7fddd437674014, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpriteManager
+  m_towers:
+  - {fileID: 21300000, guid: 37c539e37b8d74d499c3d6d543933f54, type: 3}
+  - {fileID: 21300000, guid: 01ac2fa4581ee9040badc2d04c322a02, type: 3}
+  - {fileID: 21300000, guid: 9c9ffe39575892a4ab8acd42c06d9a62, type: 3}
+  m_enemies:
+  - {fileID: 21300000, guid: e0323054f6851e249b944b1654a48b1c, type: 3}
+  - {fileID: 21300000, guid: e569d962153cb77418121bbcb57ae8e2, type: 3}
 --- !u!1 &1098425199
 GameObject:
   m_ObjectHideFlags: 0
@@ -734,7 +805,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 204d393224660444fbe94b9f7f774a1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InfoManager
-  text: {fileID: 1189401290}
+  m_text: {fileID: 1189401290}
 --- !u!1 &1189401288
 GameObject:
   m_ObjectHideFlags: 0
@@ -1065,6 +1136,8 @@ GameObject:
   - component: {fileID: 1523017351}
   - component: {fileID: 1523017353}
   - component: {fileID: 1523017352}
+  - component: {fileID: 1523017354}
+  - component: {fileID: 1523017355}
   m_Layer: 5
   m_Name: Tower1
   m_TagString: Untagged
@@ -1129,6 +1202,75 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1523017350}
   m_CullTransparentMesh: 1
+--- !u!114 &1523017354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1523017350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1523017352}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1974761045}
+        m_TargetAssemblyTypeName: InputHandler, Assembly-CSharp
+        m_MethodName: onTowerSelected
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1523017355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1523017350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73526af64f0f836468a64b929850ed57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TowerUIInfo
+  m_layerPriority: 0
 --- !u!1 &1722978345
 GameObject:
   m_ObjectHideFlags: 0
@@ -1173,6 +1315,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51b71daa41c9bc84ba7d7606a3709bfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
+  m_stats:
+  - description: Fast and low health
+    moveSpeed: 0.09
+    health: 50
+    spriteIndex: 0
+  - description: Slow and lots of health
+    moveSpeed: 0.035
+    health: 160
+    spriteIndex: 1
   m_enemyPrefab: {fileID: 5929345926524417063, guid: 3cced0f369bfc7a43832cf578d076915, type: 3}
   m_gridManager: {fileID: 1098425202}
   m_pathfinder: {fileID: 1098425203}
@@ -1267,6 +1418,8 @@ GameObject:
   - component: {fileID: 1899345955}
   - component: {fileID: 1899345957}
   - component: {fileID: 1899345956}
+  - component: {fileID: 1899345958}
+  - component: {fileID: 1899345959}
   m_Layer: 5
   m_Name: Tower3
   m_TagString: Untagged
@@ -1331,6 +1484,75 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1899345954}
   m_CullTransparentMesh: 1
+--- !u!114 &1899345958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1899345954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1899345956}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1974761045}
+        m_TargetAssemblyTypeName: InputHandler, Assembly-CSharp
+        m_MethodName: onTowerSelected
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1899345959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1899345954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73526af64f0f836468a64b929850ed57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TowerUIInfo
+  m_layerPriority: 0
 --- !u!1 &1974761043
 GameObject:
   m_ObjectHideFlags: 0
@@ -1389,6 +1611,8 @@ GameObject:
   - component: {fileID: 2016307590}
   - component: {fileID: 2016307592}
   - component: {fileID: 2016307591}
+  - component: {fileID: 2016307593}
+  - component: {fileID: 2016307594}
   m_Layer: 5
   m_Name: Tower2
   m_TagString: Untagged
@@ -1453,6 +1677,75 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2016307589}
   m_CullTransparentMesh: 1
+--- !u!114 &2016307593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2016307589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 2016307591}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1974761045}
+        m_TargetAssemblyTypeName: InputHandler, Assembly-CSharp
+        m_MethodName: onTowerSelected
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2016307594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2016307589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73526af64f0f836468a64b929850ed57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TowerUIInfo
+  m_layerPriority: 0
 --- !u!1 &2147084617
 GameObject:
   m_ObjectHideFlags: 0
@@ -1484,6 +1777,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   m_enemyManager: {fileID: 1722978347}
   m_playerHealthManager: {fileID: 599282771}
+  m_spriteManager: {fileID: 1006765119}
 --- !u!4 &2147084619
 Transform:
   m_ObjectHideFlags: 0
@@ -1618,3 +1912,4 @@ SceneRoots:
   - {fileID: 2147084619}
   - {fileID: 1974761044}
   - {fileID: 277027478}
+  - {fileID: 1006765118}

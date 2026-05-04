@@ -14,6 +14,7 @@ public class InputHandler : MonoBehaviour
     [SerializeField] TowerManager m_towerManager;
     EInputState m_activeState = EInputState.Idle;
     Cell m_hoveredCell = null;
+    int m_selectedTower = -1;
 
     private void Awake()
     {
@@ -27,18 +28,14 @@ public class InputHandler : MonoBehaviour
 
     void onClick(InputAction.CallbackContext _context)
     {
-        if (m_hoveredCell)
+        if (m_hoveredCell && m_activeState == EInputState.PlaceTower)
         {
-            m_towerManager.addTower(m_hoveredCell);
+            m_towerManager.addTower(m_hoveredCell, m_selectedTower);
         }
     }
 
     private void Update()
     {
-        if (m_activeState == EInputState.Idle)
-        {
-            // if i click a tower, my state should change, I should have that tower ID selected
-        }
         if (m_hoveredCell)
         {
             m_hoveredCell.removeHighlight();
@@ -54,5 +51,16 @@ public class InputHandler : MonoBehaviour
                 m_hoveredCell.addHighlight();
             }
         }
+    }
+
+    public void onTowerSelected(int _index)
+    {
+        if (m_selectedTower == _index)
+        {
+            m_activeState = EInputState.Idle;
+            return;
+        }
+        m_activeState = EInputState.PlaceTower;
+        m_selectedTower = _index;
     }
 }
