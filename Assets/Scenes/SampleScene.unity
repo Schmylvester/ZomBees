@@ -1271,6 +1271,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TowerUIInfo
   m_layerPriority: 0
+  m_cancel: {fileID: 21300000, guid: eb6f90a22299c2445bbbed785f86c1f4, type: 3}
 --- !u!1 &1722978345
 GameObject:
   m_ObjectHideFlags: 0
@@ -1553,6 +1554,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TowerUIInfo
   m_layerPriority: 0
+  m_cancel: {fileID: 21300000, guid: eb6f90a22299c2445bbbed785f86c1f4, type: 3}
 --- !u!1 &1974761043
 GameObject:
   m_ObjectHideFlags: 0
@@ -1600,6 +1602,7 @@ MonoBehaviour:
   m_click: {fileID: 1120369429361536294, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_gridManager: {fileID: 1098425202}
   m_towerManager: {fileID: 277027479}
+  m_sampleTower: {fileID: 2132908196}
 --- !u!1 &2016307589
 GameObject:
   m_ObjectHideFlags: 0
@@ -1746,6 +1749,83 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TowerUIInfo
   m_layerPriority: 0
+  m_cancel: {fileID: 21300000, guid: eb6f90a22299c2445bbbed785f86c1f4, type: 3}
+--- !u!1001 &2132908195
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1863228568343356409, guid: 37f193d5e5492114d99fe965c853033c, type: 3}
+      propertyPath: m_active
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2017528946165654814, guid: 37f193d5e5492114d99fe965c853033c, type: 3}
+      propertyPath: m_Name
+      value: PreviewTower
+      objectReference: {fileID: 0}
+    - target: {fileID: 2017528946165654814, guid: 37f193d5e5492114d99fe965c853033c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9131822089585747478, guid: 37f193d5e5492114d99fe965c853033c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9131822089585747478, guid: 37f193d5e5492114d99fe965c853033c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9131822089585747478, guid: 37f193d5e5492114d99fe965c853033c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9131822089585747478, guid: 37f193d5e5492114d99fe965c853033c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9131822089585747478, guid: 37f193d5e5492114d99fe965c853033c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9131822089585747478, guid: 37f193d5e5492114d99fe965c853033c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9131822089585747478, guid: 37f193d5e5492114d99fe965c853033c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9131822089585747478, guid: 37f193d5e5492114d99fe965c853033c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9131822089585747478, guid: 37f193d5e5492114d99fe965c853033c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9131822089585747478, guid: 37f193d5e5492114d99fe965c853033c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 37f193d5e5492114d99fe965c853033c, type: 3}
+--- !u!114 &2132908196 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1863228568343356409, guid: 37f193d5e5492114d99fe965c853033c, type: 3}
+  m_PrefabInstance: {fileID: 2132908195}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5701691d85889146a4b2972fc606036, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Tower
 --- !u!1 &2147084617
 GameObject:
   m_ObjectHideFlags: 0
@@ -1913,3 +1993,4 @@ SceneRoots:
   - {fileID: 1974761044}
   - {fileID: 277027478}
   - {fileID: 1006765118}
+  - {fileID: 2132908195}

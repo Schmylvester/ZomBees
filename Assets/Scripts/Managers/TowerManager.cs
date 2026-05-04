@@ -19,6 +19,16 @@ public class TowerManager : MonoBehaviour
         var tower = instance.GetComponent<Tower>();
         tower.initTowerStats(m_preparedTowers[_tower]);
         _cell.addTower(tower);
-        tower.setActive();
+    }
+
+    public ITowerStats selectTower(int _index)
+    {
+        m_info[_index].setSelected();
+        return m_preparedTowers[_index];
+    }
+
+    public void deselectTower(int _index)
+    {
+        m_info[_index].removeSelected();
     }
 }

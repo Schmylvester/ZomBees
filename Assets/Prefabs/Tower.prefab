@@ -79,7 +79,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 1, g: 0, b: 0, a: 0.39215687}
@@ -173,7 +173,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 01ac2fa4581ee9040badc2d04c322a02, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -200,6 +200,7 @@ MonoBehaviour:
   m_spriteRenderer: {fileID: 4563332126400055749}
   m_rangeIndicator: {fileID: 8247806608707625567}
   m_projectile: {fileID: 8449574439933777786}
+  m_active: 1
 --- !u!1 &4336456176702905571
 GameObject:
   m_ObjectHideFlags: 0
@@ -294,7 +295,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

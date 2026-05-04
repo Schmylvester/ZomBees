@@ -15,12 +15,12 @@ public class Tower : MonoBehaviour
     [SerializeField] SpriteRenderer m_spriteRenderer;
     [SerializeField] SpriteRenderer m_rangeIndicator;
     [SerializeField] Projectile m_projectile;
+    [SerializeField] bool m_active = false;
     ITowerStats m_stats;
     float m_lastFire = 0f;
     Enemy m_targetEnemy = null;
     // the range indicator sprite needs to be scaled by this much to match up with the tower range
     float m_rangeScale = 28f;
-    bool m_active = false;
 
     void Update()
     {
@@ -66,11 +66,6 @@ public class Tower : MonoBehaviour
     {
         m_stats = _stats;
         m_spriteRenderer.sprite = GameManager.instance.spriteManager.getTowerSprite(m_stats.spriteIndex);
-    }
-
-    public void setActive()
-    {
-        m_active = true;
     }
 
     public string getTowerInfo()
