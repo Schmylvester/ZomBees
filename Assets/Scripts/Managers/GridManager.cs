@@ -9,6 +9,7 @@ public class GridManager : MonoBehaviour
     /** grid size is determined by how many cells the center is from the edge */
     [SerializeField] int m_gridSize;
     [SerializeField] int m_baseSize;
+    [Range(0f, 1f)][SerializeField] float m_blockedCellRate;
 
     [SerializeField] Grid m_grid;
     List<Cell> m_cells = new();
@@ -34,6 +35,9 @@ public class GridManager : MonoBehaviour
                     if (Mathf.Abs(y) <= m_baseSize && x >= xBuffer && x < width - xBuffer)
                     {
                         cell.setBase();
+                    } else
+                    {
+                        cell.setAccessible(Random.value >= m_blockedCellRate);
                     }
                     var leftNeigbour = m_cells.Find(c => c.cellIndex.y == y && c.cellIndex.x == x - 1);
                     if (leftNeigbour) { cell.setNeighbour(leftNeigbour, true); }

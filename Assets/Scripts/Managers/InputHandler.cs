@@ -9,9 +9,29 @@ public enum EInputState
 
 public class InputHandler : MonoBehaviour
 {
+    [SerializeField] InputActionReference m_click;
     [SerializeField] GridManager m_gridManager;
+    [SerializeField] TowerManager m_towerManager;
     EInputState m_activeState = EInputState.Idle;
     Cell m_hoveredCell = null;
+
+    private void Awake()
+    {
+        m_click.action.performed += onClick;
+    }
+
+    private void OnDestroy()
+    {
+        m_click.action.performed -= onClick;
+    }
+
+    void onClick(InputAction.CallbackContext _context)
+    {
+        if (m_hoveredCell)
+        {
+            m_towerManager.addTower(m_hoveredCell);
+        }
+    }
 
     private void Update()
     {
@@ -31,9 +51,8 @@ public class InputHandler : MonoBehaviour
             {
                 var cell = hit.collider.GetComponent<Cell>();
                 m_hoveredCell = cell;
-                m_hoveredCell.addHighlight(Color.green, 0.5f);
+                m_hoveredCell.addHighlight();
             }
         }
-
     }
 }

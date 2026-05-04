@@ -19,7 +19,7 @@ public class EnemyManager : MonoBehaviour
             }
             if (!m_enemies[i])
             {
-                m_enemies[i] = Instantiate(m_enemyPrefab).GetComponent<Enemy>();
+                m_enemies[i] = Instantiate(m_enemyPrefab, transform).GetComponent<Enemy>();
 
                 Cell spawnCell = null;
                 var loopBreaker = 0;

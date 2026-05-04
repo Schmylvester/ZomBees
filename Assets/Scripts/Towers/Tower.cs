@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Tower : MonoBehaviour
 {
+    [SerializeField] SpriteRenderer m_rangeIndicator;
     [SerializeField] float m_range;
     [SerializeField] float m_fireRate;
     [SerializeField] int m_damage;
@@ -15,13 +16,14 @@ public class Tower : MonoBehaviour
             var enemies = GameManager.instance.enemyManager.enemies;
             if (enemies.Count > 0)
             {
-                enemies.Sort((Enemy a, Enemy b) => {
+                enemies.Sort((Enemy a, Enemy b) =>
+                {
                     if (!a) return 1;
                     if (!b) return -1;
                     var aDist = Vector3.Distance(transform.position, a.transform.position);
                     var bDist = Vector3.Distance(transform.position, b.transform.position);
                     return aDist < bDist ? -1 : 1;
-                 });
+                });
                 if (enemies[0])
                 {
                     if (Vector3.Distance(enemies[0].transform.position, transform.position) <= m_range)
@@ -39,6 +41,23 @@ public class Tower : MonoBehaviour
                 m_targetEnemy.takeDamage(m_damage);
                 m_lastFire = 0;
             }
+        }
+    }
+
+    public void addHighlight()
+    {
+        if (m_rangeIndicator)
+        {
+            m_rangeIndicator.enabled = true;
+            m_rangeIndicator.transform.localScale = m_range * 4 * Vector3.one;
+        }
+    }
+
+    public void removeHighlight()
+    {
+        if (m_rangeIndicator)
+        {
+            m_rangeIndicator.enabled = false;
         }
     }
 }

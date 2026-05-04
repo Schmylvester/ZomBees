@@ -5,6 +5,10 @@ public class CellInfo : Info
     [SerializeField] Cell m_cell;
     public override string getInfo()
     {
+        if (m_cell.tower)
+        {
+            return "There is a tower here";
+        }
         if (!m_cell.accessible)
         {
             return "An untraversible void";

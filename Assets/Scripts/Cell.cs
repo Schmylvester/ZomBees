@@ -4,8 +4,13 @@ using System.Collections.Generic;
 [RequireComponent(typeof(SpriteRenderer))]
 public class Cell : MonoBehaviour
 {
-    [Range(0f,1f)][SerializeField] float m_blockedCellRate;
+    [SerializeField] Color m_defaultColor;
+    [SerializeField] Color m_generalColour;
+    [SerializeField] Color m_blockedColour;
+    [SerializeField] Color m_highlightColor;
     Vector2Int m_cellIndex;
+    Tower m_tower = null;
+    public Tower tower {  get { return m_tower; } }
     public Vector2Int cellIndex
     { 
         get { return m_cellIndex; }
@@ -20,17 +25,11 @@ public class Cell : MonoBehaviour
     List<Cell> m_neighbours = new();
     bool m_accessible = true;
     public bool accessible { get  { return m_accessible; } }
-    Color m_defaultColor;
 
     private void Awake()
     {
         m_renderer = GetComponent<SpriteRenderer>();
         setDefaultColour(m_renderer.color);
-        if (Random.Range(0f, 1f) < m_blockedCellRate)
-        {
-            m_accessible = false;
-            setDefaultColour(Color.black);
-        }
     }
 
     public List<Cell> getNeighbours() { return m_neighbours; }
@@ -49,14 +48,22 @@ public class Cell : MonoBehaviour
 
     public bool getBase() { return m_isBase; }
 
-    public void addHighlight(Color _colour, float _strength)
+    public void addHighlight()
     {
-        m_renderer.color = Color.Lerp(m_defaultColor, _colour, _strength);
+        m_renderer.color = Color.Lerp(m_defaultColor, m_highlightColor, m_highlightColor.a);
+        if (m_tower)
+        {
+            m_tower.addHighlight();
+        }
     }
 
     public void removeHighlight()
     {
         m_renderer.color = m_defaultColor;
+        if (m_tower)
+        {
+            m_tower.removeHighlight();
+        }
     }
 
     public bool isEdge()
@@ -68,5 +75,17 @@ public class Cell : MonoBehaviour
     {
         m_defaultColor = _defaultColor;
         m_renderer.color = m_defaultColor;
+    }
+
+    public void setAccessible(bool _accessible)
+    {
+        m_accessible = _accessible;
+        setDefaultColour(m_accessible ? m_generalColour : m_blockedColour);
+    }
+
+    public void addTower(Tower _tower)
+    {
+        m_tower = _tower;
+        _tower.transform.position = transform.position;
     }
 }
