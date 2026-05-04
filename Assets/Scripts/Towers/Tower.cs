@@ -8,6 +8,8 @@ public struct ITowerStats
     public float fireRate;
     public int power;
     public int spriteIndex;
+    public bool blocksCell;
+    public int cost;
 }
 
 public class Tower : MonoBehaviour

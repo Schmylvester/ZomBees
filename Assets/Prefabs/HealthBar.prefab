@@ -164,5 +164,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70bf6b80a528c5b4da2d5b209fd0a0ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthManager
-  m_healthBar: {fileID: 8407896528227616287}
-  m_totalHealth: 100
+  m_resourceBar: {fileID: 8407896528227616287}
+  m_maxResouce: 100

@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class TowerManager : MonoBehaviour
 {
+    [SerializeField] ResourceManager m_manaManager;
     [SerializeField] TowerUIInfo[] m_info;
     [SerializeField] ITowerStats[] m_preparedTowers;
     [SerializeField] GameObject m_towerPrefab;
@@ -15,10 +16,17 @@ public class TowerManager : MonoBehaviour
 
     public void addTower(Cell _cell, int _tower)
     {
-        var instance = Instantiate(m_towerPrefab, transform);
-        var tower = instance.GetComponent<Tower>();
-        tower.initTowerStats(m_preparedTowers[_tower]);
-        _cell.addTower(tower);
+        if (m_manaManager.canAfford(m_preparedTowers[_tower].cost))
+        {
+            m_manaManager.reduceResource(m_preparedTowers[_tower].cost);
+            var instance = Instantiate(m_towerPrefab, transform);
+            var tower = instance.GetComponent<Tower>();
+            tower.initTowerStats(m_preparedTowers[_tower]);
+            _cell.addTower(tower);
+        } else
+        {
+            Debug.LogError("Not enough mana");
+        }
     }
 
     public ITowerStats selectTower(int _index)

@@ -83,9 +83,13 @@ public class Cell : MonoBehaviour
         setDefaultColour(m_accessible ? m_generalColour : m_blockedColour);
     }
 
-    public void addTower(Tower _tower)
+    public void addTower(Tower _tower, bool _blockCell = false)
     {
         m_tower = _tower;
         _tower.transform.position = transform.position;
+        if (_blockCell)
+        {
+            setAccessible(false);
+        }
     }
 }
