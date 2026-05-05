@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 public class EnemyManager : MonoBehaviour
 {
+    [SerializeField] EnemyInfoPanel m_enemyInfoPanel;
     [SerializeField] IEnemyStats[] m_stats;
     [SerializeField] GameObject m_enemyPrefab = null;
     [SerializeField] GridManager m_gridManager = null;
@@ -10,9 +11,16 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] int m_enemyCount = 1;
     [SerializeField] float m_spawnAcceleration;
     [SerializeField] ResourceManager m_manaManager;
+    /** when selecting an enemy to spawn, select from one of these indices */
+    [SerializeField] int[] m_currentEnemyPool;
     List<Enemy> m_enemies = new();
     public List<Enemy> enemies { get { return m_enemies; } }
     float m_lastSpawn;
+
+    private void Start()
+    {
+        updateEnemyPool(m_currentEnemyPool);
+    }
 
     void Update()
     {
@@ -30,7 +38,8 @@ public class EnemyManager : MonoBehaviour
             if (!m_enemies[i])
             {
                 m_enemies[i] = Instantiate(m_enemyPrefab, transform).GetComponent<Enemy>();
-                m_enemies[i].initStats(m_stats[Random.Range(0, m_stats.Length)]);
+                var stats = Random.Range(0, m_currentEnemyPool.Length);
+                m_enemies[i].initStats(m_stats[m_currentEnemyPool[stats]]);
                 m_enemies[i].onDefeat += enemyDefeated;
 
                 Cell spawnCell = null;
@@ -55,5 +64,11 @@ public class EnemyManager : MonoBehaviour
     void enemyDefeated(IEnemyStats _enemy)
     {
         m_manaManager.addResource(_enemy.yield);
+    }
+
+    public void updateEnemyPool(int[] _pool)
+    {
+        m_currentEnemyPool = _pool;
+        m_enemyInfoPanel.setPreviews(m_currentEnemyPool, m_stats);
     }
 }

@@ -1,27 +1,35 @@
 using UnityEngine;
 
+[System.Serializable]
+struct IPreparedTowers
+{
+    // just for the inspector
+    public string name;
+    public TowerUIInfo info;
+    public ITowerStats stats;
+}
+
 public class TowerManager : MonoBehaviour
 {
     [SerializeField] ResourceManager m_manaManager;
-    [SerializeField] TowerUIInfo[] m_info;
-    [SerializeField] ITowerStats[] m_preparedTowers;
+    [SerializeField] IPreparedTowers[] m_preparedTowers;
     [SerializeField] GameObject m_towerPrefab;
 
     private void Start()
     {
-        for (int i = 0; i < m_preparedTowers.Length; i++) {
-            m_info[i].tower = m_preparedTowers[i];
+        foreach (var tower in m_preparedTowers) {
+            tower.info.tower = tower.stats;
         }
     }
 
     public void addTower(Cell _cell, int _tower)
     {
-        if (m_manaManager.canAfford(m_preparedTowers[_tower].cost))
+        if (m_manaManager.canAfford(m_preparedTowers[_tower].stats.cost))
         {
-            m_manaManager.reduceResource(m_preparedTowers[_tower].cost);
+            m_manaManager.reduceResource(m_preparedTowers[_tower].stats.cost);
             var instance = Instantiate(m_towerPrefab, transform);
             var tower = instance.GetComponent<Tower>();
-            tower.initTowerStats(m_preparedTowers[_tower]);
+            tower.initTowerStats(m_preparedTowers[_tower].stats);
             _cell.addTower(tower);
         } else
         {
@@ -31,12 +39,12 @@ public class TowerManager : MonoBehaviour
 
     public ITowerStats selectTower(int _index)
     {
-        m_info[_index].setSelected();
-        return m_preparedTowers[_index];
+        m_preparedTowers[_index].info.setSelected();
+        return m_preparedTowers[_index].stats;
     }
 
     public void deselectTower(int _index)
     {
-        m_info[_index].removeSelected();
+        m_preparedTowers[_index].info.removeSelected();
     }
 }

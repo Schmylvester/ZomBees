@@ -32,18 +32,13 @@ public class InfoManager : MonoBehaviour
     {
         var infoText = "";
         List<RaycastHit2D> collisions = new();
-        Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue()), float.MaxValue, collisions);
-        var outIndex = -1;
-        for (int i = 0; i < collisions.Count; i++)
+        var collision = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue()));
+        if (collision)
         {
-            var info = collisions[i].collider.GetComponent<Info>();
+            var info = collision.collider.GetComponent<Info>();
             if (info)
             {
-                if (info.layerPriority > outIndex)
-                {
-                    infoText = info.getInfo();
-                    outIndex = info.layerPriority;
-                }
+                infoText = info.getInfo();
             }
         }
 

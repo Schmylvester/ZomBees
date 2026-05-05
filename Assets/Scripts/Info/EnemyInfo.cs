@@ -1,10 +1,11 @@
 using UnityEngine;
 
-public class EnemyInfo : Info
+public class EnemyInfo : UIInfo
 {
-    [SerializeField] Enemy m_enemy;
+    IEnemyStats m_enemy;
+    public IEnemyStats enemy { set { m_enemy = value; } }
     public override string getInfo()
     {
-        return m_enemy.stats.description;
+        return m_enemy.description;
     }
 }

@@ -19,7 +19,6 @@ public class ResourceManager : MonoBehaviour
     {
         if (m_resourceBar)
         {
-            Debug.Log("Expected scale " + (float)m_currentResource / m_maxResouce);
             m_resourceBar.localScale = new Vector3((float)m_currentResource / m_maxResouce, 1, 1);
         }
     }
