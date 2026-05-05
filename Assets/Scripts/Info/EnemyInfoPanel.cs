@@ -58,7 +58,7 @@ public class EnemyInfoPanel : MonoBehaviour
 
         // set rect size
         var w = _enemyPool.Length > 1 ? (m_previewSize * 2) + (m_padding * 3) : m_previewSize + m_padding * 2;
-        var h = m_padding + ((1 + (_enemyPool.Length / 2)) * (m_previewSize + m_padding));
+        var h = m_padding + (((1 + _enemyPool.Length) / 2) * (m_previewSize + m_padding));
         m_transform.sizeDelta = new Vector2(w, h);
     }
 
