@@ -3,6 +3,7 @@ using UnityEngine;
 [System.Serializable]
 public struct ITowerStats
 {
+    public string name;
     public string description;
     public float range;
     public float fireRate;
@@ -70,9 +71,35 @@ public class Tower : MonoBehaviour
         m_spriteRenderer.sprite = GameManager.instance.spriteManager.getTowerSprite(m_stats.spriteIndex);
     }
 
-    public string getTowerInfo()
+    public IInfo getTowerInfo()
     {
-        return m_stats.description;
+        return new IInfo {
+            name = m_stats.name,
+            description = m_stats.description,
+            stats = new IStatDisplay[]
+            {
+                new() {
+                    icon = "range",
+                    value = m_stats.range.ToString(),
+                },
+                new() {
+                    icon = "power",
+                    value = m_stats.power.ToString(),
+                },
+                new() {
+                    icon = "fireRate",
+                    value = m_stats.fireRate.ToString(),
+                },
+                new() {
+                    icon = "range",
+                    value = m_stats.range.ToString(),
+                },
+                new() {
+                    icon = "blocksCell",
+                    value = m_stats.blocksCell.ToString(),
+                }
+            }
+        };
     }
 
     public void addHighlight()

@@ -4,6 +4,7 @@ using UnityEngine;
 [System.Serializable]
 public struct IEnemyStats
 {
+    public string name;
     public string description;
     public float moveSpeed;
     public int health;

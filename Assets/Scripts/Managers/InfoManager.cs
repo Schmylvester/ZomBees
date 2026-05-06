@@ -5,7 +5,8 @@ using System.Collections.Generic;
 
 public class InfoManager : MonoBehaviour
 {
-    [SerializeField] TMP_Text m_text;
+    [SerializeField] TMP_Text m_title;
+    [SerializeField] TMP_Text m_description;
     UIInfo[] m_highlightableUI;
     UIInfo m_highlightedUI;
 
@@ -30,7 +31,7 @@ public class InfoManager : MonoBehaviour
 
     void Update()
     {
-        var infoText = "";
+        var infoText = new IInfo();
         List<RaycastHit2D> collisions = new();
         var collision = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue()));
         if (collision)
@@ -47,9 +48,10 @@ public class InfoManager : MonoBehaviour
             infoText = m_highlightedUI.getInfo();
         }
 
-        if (infoText != m_text.text)
+        if (infoText.name != m_title.text)
         {
-            m_text.text = infoText;
+            m_title.text = infoText.name;
+            m_description.text = infoText.description;
         }
     }
 

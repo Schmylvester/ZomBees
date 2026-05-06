@@ -22,9 +22,36 @@ public class TowerUIInfo : UIInfo
         }
     }
 
-    public override string getInfo()
+    public override IInfo getInfo()
     {
-        return m_tower.description;
+        return new IInfo
+        {
+            name = m_tower.name,
+            description = m_tower.description,
+            stats = new IStatDisplay[]
+            {
+                new() {
+                    icon = "range",
+                    value = m_tower.range.ToString(),
+                },
+                new() {
+                    icon = "power",
+                    value = m_tower.power.ToString(),
+                },
+                new() {
+                    icon = "fireRate",
+                    value = m_tower.fireRate.ToString(),
+                },
+                new() {
+                    icon = "range",
+                    value = m_tower.range.ToString(),
+                },
+                new() {
+                    icon = "blocksCell",
+                    value = m_tower.blocksCell.ToString(),
+                }
+            }
+        };
     }
 
     public void setSelected()
