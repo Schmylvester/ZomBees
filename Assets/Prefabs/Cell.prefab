@@ -50,6 +50,8 @@ MonoBehaviour:
   m_defaultColor: {r: 0.8862745, g: 0.70980394, b: 0, a: 1}
   m_generalColour: {r: 0.8862745, g: 0.70980394, b: 0, a: 1}
   m_blockedColour: {r: 0, g: 0, b: 0, a: 1}
+  m_baseColour: {r: 0, g: 0.94070315, b: 1, a: 1}
+  m_spawnColour: {r: 1, g: 0, b: 0, a: 1}
   m_highlightColor: {r: 0, g: 1, b: 0.003575325, a: 0.49803922}
 --- !u!212 &4898461060163618888
 SpriteRenderer:

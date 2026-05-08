@@ -18,7 +18,6 @@ public class GridManager : MonoBehaviour
 
     [SerializeField] Grid m_grid;
     List<Cell> m_cells = new();
-    public List<Cell> cells {  get { return m_cells; } }
     List<Cell> m_edgeCells = new();
     List<ISpawnCell> m_spawnCells = new();
 
@@ -99,12 +98,39 @@ public class GridManager : MonoBehaviour
         {
             Debug.Log("All available edge cells have been set as spawn cells");
         }
-        addSpawnCell(spawnCell);
+        addSpawnCell(spawnCell, true);
     }
 
-    public void addSpawnCell(int i)
+    public void removeSpawnCell(int i)
     {
-        m_spawnCells.Add(new ISpawnCell { cell = m_edgeCells[i], paths = new() { m_pathfinder.findPath(m_edgeCells[i], (c) => c.getBase()) } });
+        m_spawnCells.Remove(m_spawnCells.Find(c => c.cell == m_edgeCells[i]));
+        m_edgeCells[i].unsetSpawnCell();
+    }
+
+    public void addSpawnCell(int i, bool getPaths)
+    {
+        List<List<Cell>> paths = getPaths ? new() { m_pathfinder.findPath(m_edgeCells[i], (c) => c.getBase()) } : new();
+        m_spawnCells.Add(new ISpawnCell { cell = m_edgeCells[i], paths = paths });
         m_edgeCells[i].setSpawnCell();
+    }
+
+    public Cell wasHit(Collider2D _hit)
+    {
+        return m_cells.Find(c => _hit.gameObject == c.gameObject);
+    }
+
+    public int getCellIndex(Cell _cell)
+    {
+        return m_cells.FindIndex(c => c == _cell);
+    }
+
+    public int getEdgeIndex(Cell _cell)
+    {
+        return m_edgeCells.FindIndex(c => c == _cell);
+    }
+
+    public bool isSpawnCell(Cell _cell)
+    {
+        return m_spawnCells.FindIndex(c => c.cell == _cell) != -1;
     }
 }

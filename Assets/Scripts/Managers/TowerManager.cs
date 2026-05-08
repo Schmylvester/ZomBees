@@ -33,7 +33,7 @@ public class TowerManager : MonoBehaviour
             _cell.addTower(tower);
         } else
         {
-            Debug.LogError("Not enough mana");
+            GameManager.instance.infoManager.overrideInfo("Insufficient mana", 2f, Color.red);
         }
     }
 

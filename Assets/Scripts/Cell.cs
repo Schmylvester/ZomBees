@@ -7,6 +7,8 @@ public class Cell : MonoBehaviour
     [SerializeField] Color m_defaultColor;
     [SerializeField] Color m_generalColour;
     [SerializeField] Color m_blockedColour;
+    [SerializeField] Color m_baseColour;
+    [SerializeField] Color m_spawnColour;
     [SerializeField] Color m_highlightColor;
     Vector2Int m_cellIndex;
     Tower m_tower = null;
@@ -43,7 +45,7 @@ public class Cell : MonoBehaviour
 
     public void setBase() {
         m_isBase = true;
-        setDefaultColour(Color.cyan);
+        setDefaultColour(m_baseColour);
     }
 
     public bool getBase() { return m_isBase; }
@@ -79,7 +81,12 @@ public class Cell : MonoBehaviour
 
     public void setSpawnCell()
     {
-        setDefaultColour(Color.red);
+        setDefaultColour(m_spawnColour);
+    }
+
+    public void unsetSpawnCell()
+    {
+        setDefaultColour(m_generalColour);
     }
 
     public void setAccessible(bool _accessible)

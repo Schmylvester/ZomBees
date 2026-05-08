@@ -5,10 +5,13 @@ using System.Collections.Generic;
 
 public class InfoManager : MonoBehaviour
 {
+    [SerializeField] Color m_defaultTextColour;
     [SerializeField] TMP_Text m_title;
     [SerializeField] TMP_Text m_description;
     UIInfo[] m_highlightableUI;
     UIInfo m_highlightedUI;
+    string m_overriddenInfo = "";
+    float m_overriddenTimer = 0f;
 
     private void Awake()
     {
@@ -31,6 +34,16 @@ public class InfoManager : MonoBehaviour
 
     void Update()
     {
+        if (m_overriddenInfo != "")
+        {
+            m_overriddenTimer -= Time.deltaTime;
+            if (m_overriddenTimer < 0f)
+            {
+                m_overriddenInfo = "";
+                m_description.color = m_defaultTextColour;
+            }
+            return;
+        }
         var infoText = new IInfo();
         List<RaycastHit2D> collisions = new();
         var collision = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue()));
@@ -63,5 +76,18 @@ public class InfoManager : MonoBehaviour
     void exitUI ()
     {
         m_highlightedUI = null;
+    }
+
+    public void overrideInfo(string _info, float _time)
+    {
+        overrideInfo(_info, _time, m_defaultTextColour);
+    }
+    public void overrideInfo(string _info, float _time, Color _colour)
+    {
+        m_overriddenInfo = _info;
+        m_overriddenTimer = _time;
+        m_description.text = _info;
+        m_description.color = _colour;
+        m_title.text = "";
     }
 }

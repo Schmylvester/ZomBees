@@ -1487,17 +1487,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LevelManager
   m_gridManager: {fileID: 1098425202}
   m_enemyManager: {fileID: 1722978347}
-  m_level: debug_level
+  m_level: level1
   m_difficulty:
-    initSpawnCells: 0
+    spawnCells: 0
     setSpawnCells: 
-    initRosterCount: 0
+    rosterCount: 0
     fullRoster: 
-    initEnemyCount: 0
+    enemyCount: 0
     setLockedCells: 
     lockedCellRate: 0
     difficultyIncrementTimer: 0
     difficultyIncrementOrder: []
+    survivalTime: 0
 --- !u!1 &1128533080
 GameObject:
   m_ObjectHideFlags: 0
@@ -1690,6 +1691,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 204d393224660444fbe94b9f7f774a1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InfoManager
+  m_defaultTextColour: {r: 1, g: 1, b: 1, a: 1}
   m_title: {fileID: 1930453432}
   m_description: {fileID: 1967452923}
 --- !u!1 &1177437268
@@ -2333,20 +2335,20 @@ MonoBehaviour:
   m_stats:
   - name: Debug bug
     description: Debug bug
-    moveSpeed: 1
+    moveSpeed: 8
     health: 50000
     spriteIndex: 0
     yield: 2
   - name: Black ant
     description: Slow and lots of health
-    moveSpeed: 0.35
-    health: 160
+    moveSpeed: 0.5
+    health: 180
     spriteIndex: 1
     yield: 3
   - name: Red ant
     description: Fast and low health
-    moveSpeed: 0.65
-    health: 70
+    moveSpeed: 0.8
+    health: 100
     spriteIndex: 0
     yield: 3
   m_enemyPrefab: {fileID: 5929345926524417063, guid: 3cced0f369bfc7a43832cf578d076915, type: 3}
@@ -2986,7 +2988,9 @@ MonoBehaviour:
   m_click: {fileID: 1120369429361536294, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_gridManager: {fileID: 1098425202}
   m_towerManager: {fileID: 277027479}
+  m_levelDesignManager: {fileID: 0}
   m_sampleTower: {fileID: 2132908196}
+  m_activeState: 0
 --- !u!1 &2010187774
 GameObject:
   m_ObjectHideFlags: 0
@@ -3364,6 +3368,7 @@ MonoBehaviour:
   m_enemyManager: {fileID: 1722978347}
   m_playerHealthManager: {fileID: 599282771}
   m_spriteManager: {fileID: 1006765119}
+  m_infoManager: {fileID: 1135609814}
 --- !u!4 &2147084619
 Transform:
   m_ObjectHideFlags: 0

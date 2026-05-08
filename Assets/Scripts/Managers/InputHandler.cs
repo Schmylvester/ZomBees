@@ -5,6 +5,8 @@ public enum EInputState
 {
     Idle,
     PlaceTower,
+
+    LevelDesign,
 }
 
 public class InputHandler : MonoBehaviour
@@ -12,9 +14,10 @@ public class InputHandler : MonoBehaviour
     [SerializeField] InputActionReference m_click;
     [SerializeField] GridManager m_gridManager;
     [SerializeField] TowerManager m_towerManager;
+    [SerializeField] LevelDesignManager m_levelDesignManager;
     /** sample tower gives player a preview of tower placement and range */
     [SerializeField] Tower m_sampleTower;
-    EInputState m_activeState = EInputState.Idle;
+    [SerializeField] EInputState m_activeState = EInputState.Idle;
     Cell m_hoveredCell = null;
     int m_selectedTower = -1;
 
@@ -30,10 +33,20 @@ public class InputHandler : MonoBehaviour
 
     void onClick(InputAction.CallbackContext _context)
     {
-        if (m_hoveredCell && m_activeState == EInputState.PlaceTower)
+        if (m_hoveredCell)
         {
-            m_towerManager.addTower(m_hoveredCell, m_selectedTower);
-            deselectTower();
+            switch (m_activeState)
+            {
+                case EInputState.PlaceTower:
+                    m_towerManager.addTower(m_hoveredCell, m_selectedTower);
+                    deselectTower();
+                    break;
+                case EInputState.LevelDesign:
+                    m_levelDesignManager.toggleCell(m_hoveredCell);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
@@ -48,7 +61,7 @@ public class InputHandler : MonoBehaviour
         RaycastHit2D hit = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(mousePos));
         if (hit.collider != null)
         {
-            if (m_gridManager.cells.Find(c => hit.collider.gameObject == c.gameObject))
+            if (m_gridManager.wasHit(hit.collider))
             {
                 var cell = hit.collider.GetComponent<Cell>();
                 m_hoveredCell = cell;

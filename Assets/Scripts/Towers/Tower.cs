@@ -31,6 +31,7 @@ public class Tower : MonoBehaviour
         {
             return;
         }
+        m_lastFire += Time.deltaTime;
         if (m_targetEnemy == null)
         {
             var enemies = GameManager.instance.enemyManager.enemies;
@@ -53,14 +54,19 @@ public class Tower : MonoBehaviour
                 }
             }
         }
-        m_lastFire += Time.deltaTime;
         if (m_targetEnemy)
         {
-            if (m_lastFire >= 1f / m_stats.fireRate)
+            if (Vector3.Distance(m_targetEnemy.transform.position, transform.position) > m_stats.range)
             {
-                StartCoroutine(m_projectile.fire(m_targetEnemy.transform));
-                m_targetEnemy.takeDamage(m_stats.power);
-                m_lastFire = 0;
+                m_targetEnemy = null;
+            } else
+            {
+                if (m_lastFire >= 1f / m_stats.fireRate)
+                {
+                    StartCoroutine(m_projectile.fire(m_targetEnemy.transform));
+                    m_targetEnemy.takeDamage(m_stats.power);
+                    m_lastFire = 0;
+                }
             }
         }
     }
