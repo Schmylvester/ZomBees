@@ -17,6 +17,7 @@ public class Enemy : MonoBehaviour
     public delegate void Defeat(IEnemyStats _stats);
     public Defeat onDefeat;
 
+    [SerializeField] float m_healthBarOffset;
     [SerializeField] SpriteRenderer m_spriteRenderer;
     [SerializeField] GameObject m_healthBarPrefab;
     Transform m_healthBar;
@@ -26,6 +27,8 @@ public class Enemy : MonoBehaviour
     public IEnemyStats stats { get { return m_stats; } }
 
     public List<Cell> path { set { m_path = value; } }
+    bool m_active = false;
+    public bool active { get { return m_active; } set { m_active = value; } }
 
     public void takeDamage(int _damage)
     {
@@ -38,7 +41,7 @@ public class Enemy : MonoBehaviour
         var canvas = FindAnyObjectByType<Canvas>();
         m_healthBar = Instantiate(m_healthBarPrefab, canvas.transform).transform;
         m_healthBar.localScale = new Vector3(0.02f, 0.2f);
-        m_healthBar.transform.position = Camera.main.WorldToScreenPoint(transform.position) + (Vector3.up * 20);
+        syncHealthBar();
         m_healthManager = m_healthBar.GetComponent<ResourceManager>();
         m_healthManager.setInitResource(m_stats.health);
         m_healthManager.onResourceEmpty += defeat;
@@ -54,7 +57,7 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        m_healthBar.transform.position = Camera.main.WorldToScreenPoint(transform.position) + (Vector3.up * 20);
+        syncHealthBar();
         if (m_path.Count == 0)
         {
             return;
@@ -67,15 +70,21 @@ public class Enemy : MonoBehaviour
             if (m_path.Count == 0)
             {
                 GameManager.instance.playerHealthManager.reduceResource(3, true);
-                Destroy(gameObject);
+                active = false;
             }
         }
+    }
+
+    void syncHealthBar()
+    {
+        m_healthBar.transform.position = Camera.main.WorldToScreenPoint(transform.position + (Vector3.up * m_healthBarOffset));
     }
 
     void defeat()
     {
         onDefeat?.Invoke(m_stats);
-        Destroy(gameObject);
+
+        active = false;
     }
 
     private void OnDestroy()

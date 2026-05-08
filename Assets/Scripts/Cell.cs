@@ -77,6 +77,11 @@ public class Cell : MonoBehaviour
         m_renderer.color = m_defaultColor;
     }
 
+    public void setSpawnCell()
+    {
+        setDefaultColour(Color.red);
+    }
+
     public void setAccessible(bool _accessible)
     {
         m_accessible = _accessible;

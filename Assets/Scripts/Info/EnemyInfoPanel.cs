@@ -14,9 +14,9 @@ public class EnemyInfoPanel : MonoBehaviour
     [SerializeField] float m_padding;
     [SerializeField] float m_previewSize;
     [SerializeField] RectTransform m_transform;
-    IInfoPanelData[] m_children;
+    IInfoPanelData[] m_children = null;
 
-    private void Start()
+    private void init()
     {
         var renderers = new List<Image>();
         var info = new List<EnemyInfo>();
@@ -40,6 +40,10 @@ public class EnemyInfoPanel : MonoBehaviour
 
     public void setPreviews(int[] _enemyPool, IEnemyStats[] _stats)
     {
+        if (m_children == null)
+        {
+            init();
+        }
         for (var i = 0; i < m_children.Length; ++i)
         {
             if (i < _enemyPool.Length)

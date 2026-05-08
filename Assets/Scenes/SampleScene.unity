@@ -1428,7 +1428,6 @@ MonoBehaviour:
   m_pathfinder: {fileID: 1098425203}
   m_gridSize: 10
   m_baseSize: 1
-  m_blockedCellRate: 0.25
   m_grid: {fileID: 1098425201}
 --- !u!114 &1098425203
 MonoBehaviour:
@@ -1442,6 +1441,63 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eec0c1127d07944ca62df5d201ab978, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Pathfinder
+--- !u!1 &1106383305
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1106383306}
+  - component: {fileID: 1106383307}
+  m_Layer: 0
+  m_Name: LevelManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1106383306
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1106383305}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1106383307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1106383305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26a0bf23494c63c4ba7573572d8191f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelManager
+  m_gridManager: {fileID: 1098425202}
+  m_enemyManager: {fileID: 1722978347}
+  m_level: debug_level
+  m_difficulty:
+    initSpawnCells: 0
+    setSpawnCells: 
+    initRosterCount: 0
+    fullRoster: 
+    initEnemyCount: 0
+    setLockedCells: 
+    lockedCellRate: 0
+    difficultyIncrementTimer: 0
+    difficultyIncrementOrder: []
 --- !u!1 &1128533080
 GameObject:
   m_ObjectHideFlags: 0
@@ -2277,7 +2333,7 @@ MonoBehaviour:
   m_stats:
   - name: Debug bug
     description: Debug bug
-    moveSpeed: 0
+    moveSpeed: 1
     health: 50000
     spriteIndex: 0
     yield: 2
@@ -2295,11 +2351,7 @@ MonoBehaviour:
     yield: 3
   m_enemyPrefab: {fileID: 5929345926524417063, guid: 3cced0f369bfc7a43832cf578d076915, type: 3}
   m_gridManager: {fileID: 1098425202}
-  m_pathfinder: {fileID: 1098425203}
-  m_enemyCount: 1
-  m_spawnAcceleration: 45
   m_manaManager: {fileID: 951839283}
-  m_currentEnemyPool: 01000000
 --- !u!1 &1736882682
 GameObject:
   m_ObjectHideFlags: 0
@@ -3449,3 +3501,4 @@ SceneRoots:
   - {fileID: 1006765118}
   - {fileID: 2132908195}
   - {fileID: 299925221}
+  - {fileID: 1106383306}

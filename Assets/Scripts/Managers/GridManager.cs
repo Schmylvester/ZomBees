@@ -1,6 +1,12 @@
 using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine.InputSystem;
+using System.Linq;
+
+struct ISpawnCell
+{
+    public Cell cell;
+    public List<List<Cell>> paths;
+}
 
 public class GridManager : MonoBehaviour
 {
@@ -9,12 +15,12 @@ public class GridManager : MonoBehaviour
     /** grid size is determined by how many cells the center is from the edge */
     [SerializeField] int m_gridSize;
     [SerializeField] int m_baseSize;
-    [Range(0f, 1f)][SerializeField] float m_blockedCellRate;
 
     [SerializeField] Grid m_grid;
     List<Cell> m_cells = new();
     public List<Cell> cells {  get { return m_cells; } }
     List<Cell> m_edgeCells = new();
+    List<ISpawnCell> m_spawnCells = new();
 
     void Awake()
     {
@@ -35,9 +41,6 @@ public class GridManager : MonoBehaviour
                     if (Mathf.Abs(y) <= m_baseSize && x >= xBuffer && x < width - xBuffer)
                     {
                         cell.setBase();
-                    } else
-                    {
-                        cell.setAccessible(Random.value >= m_blockedCellRate);
                     }
                     var leftNeigbour = m_cells.Find(c => c.cellIndex.y == y && c.cellIndex.x == x - 1);
                     if (leftNeigbour) { cell.setNeighbour(leftNeigbour, true); }
@@ -57,8 +60,51 @@ public class GridManager : MonoBehaviour
         }
     }
 
-    public Cell getRandomEdgeCell()
+    public void setCustomMap(int[] _blockedCells)
     {
-        return m_edgeCells[Random.Range(0, m_edgeCells.Count)];
+        foreach (var cell in _blockedCells)
+        {
+            if (!m_cells[cell].getBase() && !m_cells[cell].isEdge())
+            {
+                m_cells[cell].setAccessible(false);
+            }
+        }
+    }
+
+    public void setRandomMap(float _blockedCellRate)
+    {
+        foreach (var cell in m_cells) {
+            if (!cell.getBase() && !cell.isEdge())
+            {
+                cell.setAccessible(Random.value >= _blockedCellRate);
+            }
+        }
+    }
+
+    public List<Cell> getRandomPath()
+    {
+        var spawnCellIndex = Random.Range(0, m_spawnCells.Count);
+        var spawnCell = m_spawnCells[spawnCellIndex];
+        var pathIndex = Random.Range(0, spawnCell.paths.Count);
+        return spawnCell.paths[pathIndex];
+    }
+
+    public void addSpawnCell()
+    {
+        m_edgeCells = m_edgeCells.OrderBy(x => Random.value).ToList();
+        var spawnCell = m_edgeCells.FindIndex(cell => {
+            return (m_spawnCells.FindIndex(sc => sc.cell == cell) == -1);
+        });
+        if (spawnCell == -1)
+        {
+            Debug.Log("All available edge cells have been set as spawn cells");
+        }
+        addSpawnCell(spawnCell);
+    }
+
+    public void addSpawnCell(int i)
+    {
+        m_spawnCells.Add(new ISpawnCell { cell = m_edgeCells[i], paths = new() { m_pathfinder.findPath(m_edgeCells[i], (c) => c.getBase()) } });
+        m_edgeCells[i].setSpawnCell();
     }
 }

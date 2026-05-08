@@ -104,5 +104,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f4bd315b8df8894dad7e4a5868b87a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
+  m_healthBarOffset: 0.2
   m_spriteRenderer: {fileID: 928460860015200012}
   m_healthBarPrefab: {fileID: 2187881676331973139, guid: 7755b7748d35127409bacd69ac23b53c, type: 3}

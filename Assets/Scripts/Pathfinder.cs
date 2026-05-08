@@ -2,12 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public enum TargetType
-{
-    Base,
-    Tower,
-}
-
 struct PathNode
 {
     public Cell current;
@@ -17,7 +11,8 @@ struct PathNode
 
 public class Pathfinder : MonoBehaviour
 {
-    public List<Cell> findPath(Cell origin, TargetType target)
+    public delegate bool PathTarget(Cell _c);
+    public List<Cell> findPath(Cell origin, PathTarget target)
     {
         var closedList = new List<PathNode>();
         var openList = new List<PathNode>();
@@ -27,7 +22,7 @@ public class Pathfinder : MonoBehaviour
             closedList.Add(workingCandidate);
             openList.Remove(workingCandidate);
 
-            if (target == TargetType.Base)
+            if (target.Invoke(workingCandidate.current))
             {
                 if (workingCandidate.current.getBase()) {
                     var path = new List<Cell>();
