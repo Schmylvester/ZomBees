@@ -19,8 +19,13 @@ public class EnemyManager : MonoBehaviour
         for (int i = 0; i < m_enemyCount; ++i) {
             if (m_enemies.Count == i)
             {
-                m_enemies.Add(null);
-                m_enemies[i] = Instantiate(m_enemyPrefab, transform).GetComponent<Enemy>();
+                var instance = Instantiate(m_enemyPrefab, transform).GetComponent<Enemy>();
+                instance.gameObject.name = "Enemy " + i;
+                foreach (var enemy in m_enemies)
+                {
+                    enemy.addOther(instance, true);
+                }
+                m_enemies.Add(instance);
                 m_enemies[i].onDefeat += enemyDefeated;
             }
             if (!m_enemies[i].active)

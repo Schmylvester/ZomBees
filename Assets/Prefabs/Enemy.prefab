@@ -107,3 +107,4 @@ MonoBehaviour:
   m_healthBarOffset: 0.2
   m_spriteRenderer: {fileID: 928460860015200012}
   m_healthBarPrefab: {fileID: 2187881676331973139, guid: 7755b7748d35127409bacd69ac23b53c, type: 3}
+  m_politeness: 0.2

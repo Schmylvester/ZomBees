@@ -21,9 +21,12 @@ public class Enemy : MonoBehaviour
     [SerializeField] float m_healthBarOffset;
     [SerializeField] SpriteRenderer m_spriteRenderer;
     [SerializeField] GameObject m_healthBarPrefab;
+    // I avoid getting within this distance of another ant
+    [SerializeField] float m_politeness;
     Transform m_healthBar;
     ResourceManager m_healthManager;
     List<Cell> m_path = new();
+    List<Enemy> m_others = new();
     IEnemyStats m_stats;
     public IEnemyStats stats { get { return m_stats; } }
 
@@ -56,6 +59,18 @@ public class Enemy : MonoBehaviour
             m_healthManager.setInitResource(m_stats.health);
     }
 
+    public void addOther(Enemy other, bool reciprocate = false)
+    {
+        if (other != this && m_others.Find(o => o == other) == null)
+        {
+            m_others.Add(other);
+            if (reciprocate)
+            {
+                other.addOther(this);
+            }
+        }
+    }
+
     private void Update()
     {
         syncHealthBar();
@@ -64,8 +79,28 @@ public class Enemy : MonoBehaviour
             return;
         }
         var target = m_path[0].transform.position;
-        transform.position += (target - transform.position).normalized * m_stats.moveSpeed * Time.deltaTime;
-        if (Vector3.Distance(transform.position, target) < m_stats.moveSpeed * Time.deltaTime)
+        var distanceToTarget = Vector3.Distance(transform.position, target);
+        bool wait = false;
+        foreach (var other in m_others)
+        {
+            if (Vector3.Distance(transform.position, other.transform.position) < m_politeness)
+            {
+                var otherDistanceToTarget = Vector3.Distance(other.transform.position, target);
+                if (otherDistanceToTarget < distanceToTarget) {
+                    wait = true;
+                    break;
+                }
+                if (otherDistanceToTarget == distanceToTarget)
+                {
+                    wait = Random.value < 0.5f;
+                }
+            }
+        }
+        if (!wait)
+        {
+            transform.position += (target - transform.position).normalized * m_stats.moveSpeed * Time.deltaTime;
+        }
+        if (distanceToTarget < m_stats.moveSpeed * Time.deltaTime)
         {
             m_path.RemoveAt(0);
             if (m_path.Count == 0)
