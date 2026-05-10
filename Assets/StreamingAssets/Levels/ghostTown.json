@@ -1,0 +1,11 @@
+{
+  "spawnCells": 15,
+  "rosterCount": 1,
+  "fullRoster": [ 1, 2 ],
+  "enemyCount": 100,
+  "setLockedCells": [ ],
+  "setSpawnCells": [ ],
+  "difficultyIncrementTimer": 3,
+  "difficultyIncrementOrder": [ "spawnCells", "enemyCount", "spawnCells", "enemyCount", "spawnCells", "spawnCells", "enemyCount", "enemyCount", "roster", "enemyCount", "enemyCount" ],
+  "survivalTime": 60
+}

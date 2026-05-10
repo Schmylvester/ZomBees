@@ -35,7 +35,7 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-        string filePath = Path.Combine(Application.streamingAssetsPath, m_level + ".json");
+        string filePath = Path.Combine(Application.streamingAssetsPath, "Levels/" + m_level + ".json");
         if (File.Exists(filePath))
         {
             string dataAsJson = File.ReadAllText(filePath);

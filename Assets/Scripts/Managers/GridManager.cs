@@ -82,6 +82,7 @@ public class GridManager : MonoBehaviour
         if (spawnCell == -1)
         {
             Debug.Log("All available edge cells have been set as spawn cells");
+            return;
         }
         addSpawnCell(spawnCell);
     }

@@ -1486,7 +1486,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LevelManager
   m_gridManager: {fileID: 1098425202}
   m_enemyManager: {fileID: 1722978347}
-  m_level: level1
+  m_level: level2
   m_difficulty:
     spawnCells: 0
     setSpawnCells: 

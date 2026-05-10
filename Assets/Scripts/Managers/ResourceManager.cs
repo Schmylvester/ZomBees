@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ResourceManager : MonoBehaviour
 {
@@ -10,9 +11,18 @@ public class ResourceManager : MonoBehaviour
     [SerializeField] int m_maxResouce = 100;
     int m_currentResource;
 
+    [SerializeField] float m_showTime = 0f;
+    float m_currentShowTimer = 0f;
+
+    [SerializeField] Image[] m_display;
+
     private void Start()
     {
         m_currentResource = m_maxResouce;
+        if (m_showTime > 0)
+        {
+            setVisible(false);
+        }
     }
 
     private void Update()
@@ -20,6 +30,14 @@ public class ResourceManager : MonoBehaviour
         if (m_resourceBar)
         {
             m_resourceBar.localScale = new Vector3((float)m_currentResource / m_maxResouce, 1, 1);
+        }
+        if (m_showTime > 0 && m_currentShowTimer > 0)
+        {
+            m_currentShowTimer -= Time.deltaTime;
+            if (m_currentShowTimer < 0)
+            {
+                setVisible(false);
+            }
         }
     }
 
@@ -35,6 +53,12 @@ public class ResourceManager : MonoBehaviour
             m_currentResource = 0;
             onResourceEmpty?.Invoke();
         }
+
+        if (m_showTime > 0)
+        {
+            m_currentShowTimer = m_showTime;
+            setVisible(true);
+        }
     }
 
     public void addResource(int increment, bool alwaysValue = false)
@@ -43,6 +67,12 @@ public class ResourceManager : MonoBehaviour
             increment = Mathf.Max(increment, 1);
         }
         m_currentResource = Mathf.Min(m_currentResource + increment, m_maxResouce);
+
+        if (m_showTime > 0)
+        {
+            m_currentShowTimer = m_showTime;
+            setVisible(true);
+        }
     }
 
     public void setInitResource(int _resource)
@@ -54,5 +84,13 @@ public class ResourceManager : MonoBehaviour
     public bool canAfford(int cost)
     {
         return m_currentResource >= cost;
+    }
+
+    void setVisible(bool visible)
+    {
+        foreach (var display in m_display)
+        {
+            display.enabled = visible;
+        }
     }
 }

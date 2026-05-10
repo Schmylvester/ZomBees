@@ -9,7 +9,7 @@ public class LevelDesignManager : MonoBehaviour
     List<int> m_spawnCells = new();
     public void onSave()
     {
-        string filePath = Path.Combine(Application.streamingAssetsPath, System.DateTime.Now.ToFileTimeUtc() + ".json");
+        string filePath = Path.Combine(Application.streamingAssetsPath, "Levels/" + System.DateTime.Now.ToFileTimeUtc() + ".json");
         var file = File.CreateText(filePath);
         file.WriteLine("{" + getFile() + "}");
         file.Close();
