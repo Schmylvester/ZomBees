@@ -7,6 +7,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] IEnemyStats[] m_stats;
     [SerializeField] GameObject m_enemyPrefab = null;
     [SerializeField] GridManager m_gridManager = null;
+    [SerializeField] Pathfinder m_pathfinder = null;
     [SerializeField] ResourceManager m_manaManager;
     List<Enemy> m_enemies = new();
     public List<Enemy> enemies { get { return m_enemies; } }
@@ -27,8 +28,9 @@ public class EnemyManager : MonoBehaviour
                 var stats = Random.Range(0, m_currentEnemyRoster.Length);
                 m_enemies[i].initStats(m_stats[m_currentEnemyRoster[stats]]);
 
-                List<Cell> path = m_gridManager.getRandomPath();
-                m_enemies[i].transform.position = path[0].transform.position;
+                var spawn = m_gridManager.getRandomSpawnCell();
+                List<Cell> path = m_pathfinder.findPath(spawn, (c) => c.getBase());
+                m_enemies[i].transform.position = spawn.transform.position;
                 m_enemies[i].path = new(path);
                 m_enemies[i].active = true;
             }

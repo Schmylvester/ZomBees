@@ -27,7 +27,7 @@ public class LevelDesignManager : MonoBehaviour
                 m_spawnCells.Remove(edgeIndex);
             } else
             {
-                m_gridManager.addSpawnCell(edgeIndex, false);
+                m_gridManager.addSpawnCell(edgeIndex);
                 m_spawnCells.Add(edgeIndex);
             }
         } else

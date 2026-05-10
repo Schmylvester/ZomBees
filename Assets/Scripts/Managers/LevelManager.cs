@@ -53,7 +53,7 @@ public class LevelManager : MonoBehaviour
         {
             if (m_difficulty.setSpawnCells.Length > i)
             {
-            m_gridManager.addSpawnCell(m_difficulty.setSpawnCells[i], true);
+            m_gridManager.addSpawnCell(m_difficulty.setSpawnCells[i]);
 
             } else
             {
@@ -84,7 +84,7 @@ public class LevelManager : MonoBehaviour
                     case "spawnCells":
                         if (m_difficulty.spawnCells < m_difficulty.setSpawnCells.Length)
                         {
-                            m_gridManager.addSpawnCell(m_difficulty.setSpawnCells[m_difficulty.spawnCells], true);
+                            m_gridManager.addSpawnCell(m_difficulty.setSpawnCells[m_difficulty.spawnCells]);
                         } else
                         {
                             m_gridManager.addSpawnCell();

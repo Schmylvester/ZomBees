@@ -2,16 +2,9 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 
-struct ISpawnCell
-{
-    public Cell cell;
-    public List<List<Cell>> paths;
-}
-
 public class GridManager : MonoBehaviour
 {
     [SerializeField] GameObject m_cellObject;
-    [SerializeField] Pathfinder m_pathfinder;
     /** grid size is determined by how many cells the center is from the edge */
     [SerializeField] int m_gridSize;
     [SerializeField] int m_baseSize;
@@ -19,7 +12,7 @@ public class GridManager : MonoBehaviour
     [SerializeField] Grid m_grid;
     List<Cell> m_cells = new();
     List<Cell> m_edgeCells = new();
-    List<ISpawnCell> m_spawnCells = new();
+    List<Cell> m_spawnCells = new();
 
     void Awake()
     {
@@ -80,37 +73,28 @@ public class GridManager : MonoBehaviour
         }
     }
 
-    public List<Cell> getRandomPath()
-    {
-        var spawnCellIndex = Random.Range(0, m_spawnCells.Count);
-        var spawnCell = m_spawnCells[spawnCellIndex];
-        var pathIndex = Random.Range(0, spawnCell.paths.Count);
-        return spawnCell.paths[pathIndex];
-    }
-
     public void addSpawnCell()
     {
         m_edgeCells = m_edgeCells.OrderBy(x => Random.value).ToList();
         var spawnCell = m_edgeCells.FindIndex(cell => {
-            return (m_spawnCells.FindIndex(sc => sc.cell == cell) == -1);
+            return (m_spawnCells.FindIndex(sc => sc == cell) == -1);
         });
         if (spawnCell == -1)
         {
             Debug.Log("All available edge cells have been set as spawn cells");
         }
-        addSpawnCell(spawnCell, true);
+        addSpawnCell(spawnCell);
     }
 
     public void removeSpawnCell(int i)
     {
-        m_spawnCells.Remove(m_spawnCells.Find(c => c.cell == m_edgeCells[i]));
+        m_spawnCells.Remove(m_edgeCells[i]);
         m_edgeCells[i].unsetSpawnCell();
     }
 
-    public void addSpawnCell(int i, bool getPaths)
+    public void addSpawnCell(int i)
     {
-        List<List<Cell>> paths = getPaths ? new() { m_pathfinder.findPath(m_edgeCells[i], (c) => c.getBase()) } : new();
-        m_spawnCells.Add(new ISpawnCell { cell = m_edgeCells[i], paths = paths });
+        m_spawnCells.Add(m_edgeCells[i]);
         m_edgeCells[i].setSpawnCell();
     }
 
@@ -131,6 +115,11 @@ public class GridManager : MonoBehaviour
 
     public bool isSpawnCell(Cell _cell)
     {
-        return m_spawnCells.FindIndex(c => c.cell == _cell) != -1;
+        return m_spawnCells.FindIndex(c => c == _cell) != -1;
+    }
+
+    public Cell getRandomSpawnCell()
+    {
+        return m_spawnCells[Random.Range(0, m_spawnCells.Count)];
     }
 }

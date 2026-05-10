@@ -1425,7 +1425,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Grids
   m_cellObject: {fileID: 6841442451829236354, guid: 7b6975f308d683647b56a48878e35524, type: 3}
-  m_pathfinder: {fileID: 1098425203}
   m_gridSize: 10
   m_baseSize: 1
   m_grid: {fileID: 1098425201}
@@ -2338,21 +2337,25 @@ MonoBehaviour:
     moveSpeed: 8
     health: 50000
     spriteIndex: 0
+    damage: 1
     yield: 2
   - name: Black ant
     description: Slow and lots of health
     moveSpeed: 0.5
     health: 180
     spriteIndex: 1
+    damage: 1
     yield: 3
   - name: Red ant
     description: Fast and low health
     moveSpeed: 0.8
     health: 100
     spriteIndex: 0
+    damage: 1
     yield: 3
   m_enemyPrefab: {fileID: 5929345926524417063, guid: 3cced0f369bfc7a43832cf578d076915, type: 3}
   m_gridManager: {fileID: 1098425202}
+  m_pathfinder: {fileID: 1098425203}
   m_manaManager: {fileID: 951839283}
 --- !u!1 &1736882682
 GameObject:

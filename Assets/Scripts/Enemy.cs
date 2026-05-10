@@ -9,6 +9,7 @@ public struct IEnemyStats
     public float moveSpeed;
     public int health;
     public int spriteIndex;
+    public int damage;
     public int yield;
 }
 
@@ -69,7 +70,7 @@ public class Enemy : MonoBehaviour
             m_path.RemoveAt(0);
             if (m_path.Count == 0)
             {
-                GameManager.instance.playerHealthManager.reduceResource(3, true);
+                GameManager.instance.playerHealthManager.reduceResource(m_stats.damage, true);
                 active = false;
             }
         }
