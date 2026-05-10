@@ -44,7 +44,6 @@ public class Enemy : MonoBehaviour
     {
         var canvas = FindAnyObjectByType<Canvas>();
         m_healthBar = Instantiate(m_healthBarPrefab, canvas.transform).transform;
-        m_healthBar.localScale = new Vector3(0.02f, 0.2f);
         syncHealthBar();
         m_healthManager = m_healthBar.GetComponent<ResourceManager>();
         m_healthManager.setInitResource(m_stats.health);
