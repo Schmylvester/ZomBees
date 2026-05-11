@@ -4,6 +4,8 @@ using System.Linq;
 
 public class GridManager : MonoBehaviour
 {
+    [SerializeField] EnemyManager m_enemyManager;
+    [SerializeField] Pathfinder m_pathfinder;
     [SerializeField] GameObject m_cellObject;
     /** grid size is determined by how many cells the center is from the edge */
     [SerializeField] int m_gridSize;
@@ -13,6 +15,8 @@ public class GridManager : MonoBehaviour
     List<Cell> m_cells = new();
     List<Cell> m_edgeCells = new();
     List<Cell> m_spawnCells = new();
+    List<Cell> m_essentialPathCells = new();
+    bool m_mapLoaded = false;
 
     void Awake()
     {
@@ -29,6 +33,7 @@ public class GridManager : MonoBehaviour
                 var cell = instance.GetComponent<Cell>();
                 cell.cellIndex = new Vector2Int(x, y);
                 if (cell != null) {
+                    cell.cellAccessibleUpdate += (bool _accessible) => cellAccessibilityUpdate(cell, _accessible);
                     m_cells.Add(cell);
                     if (Mathf.Abs(y) <= m_baseSize && x >= xBuffer && x < width - xBuffer)
                     {
@@ -95,6 +100,7 @@ public class GridManager : MonoBehaviour
 
     public void addSpawnCell(int i)
     {
+        m_mapLoaded = true;
         m_spawnCells.Add(m_edgeCells[i]);
         m_edgeCells[i].setSpawnCell();
     }
@@ -122,5 +128,48 @@ public class GridManager : MonoBehaviour
     public Cell getRandomSpawnCell()
     {
         return m_spawnCells[Random.Range(0, m_spawnCells.Count)];
+    }
+
+    public bool isEssential(Cell _cell)
+    {
+        return m_essentialPathCells.Contains(_cell);
+    }
+
+    public void identifyEssentialCells()
+    {
+        if (!m_mapLoaded)
+        {
+            return;
+        }
+        m_essentialPathCells.Clear();
+        foreach (Cell cell in m_cells)
+        {
+            if (!cell.isEdge() && cell.accessible)
+            {
+                // all edge cells are unblockable, so if we can get a path from any spawn cell, we can get a path from them all
+                var essential = m_pathfinder.findPath(m_spawnCells[0], (c) => c.getBase(), cell).Count == 0;
+                if (essential)
+                {
+                    m_essentialPathCells.Add(cell);
+                }
+            }
+        }
+    }
+
+    void cellAccessibilityUpdate(Cell _cell, bool _accessible)
+    {
+        identifyEssentialCells();
+        if (!_accessible)
+        {
+            m_enemyManager.checkFindAlternativePaths(_cell);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        foreach(var cell in m_cells)
+        {
+            cell.cellAccessibleUpdate -= (bool _accessible) => cellAccessibilityUpdate(cell, _accessible);
+        }
     }
 }

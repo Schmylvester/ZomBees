@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 [System.Serializable]
 public struct IEnemyStats
@@ -120,6 +121,20 @@ public class Enemy : MonoBehaviour
         onDefeat?.Invoke(m_stats);
 
         active = false;
+    }
+
+
+    /** this cell just got blocked, do I need to find another way? */
+    public void checkFindAlternativePaths(Cell _cell, Pathfinder _pathfinder)
+    {
+        if (m_path.Contains(_cell))
+        {
+            m_path = _pathfinder.findPath(m_path[0], (c) => c.getBase(), _cell);
+            if (m_path.Count == 0)
+            {
+                defeat();
+            }
+        }
     }
 
     private void OnDestroy()

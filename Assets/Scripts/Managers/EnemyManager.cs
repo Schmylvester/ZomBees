@@ -57,4 +57,13 @@ public class EnemyManager : MonoBehaviour
         m_currentEnemyRoster = _pool;
         m_enemyInfoPanel.setPreviews(m_currentEnemyRoster, m_stats);
     }
+
+    /** this cell just got blocked, do I need to find another way? */
+    public void checkFindAlternativePaths(Cell _cell)
+    {
+        foreach (var enemy in m_enemies)
+        {
+            enemy.checkFindAlternativePaths(_cell, m_pathfinder);
+        }
+    }
 }

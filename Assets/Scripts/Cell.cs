@@ -4,6 +4,9 @@ using System.Collections.Generic;
 [RequireComponent(typeof(SpriteRenderer))]
 public class Cell : MonoBehaviour
 {
+    public delegate void CellAccessibleUpdate(bool _accessible);
+    public CellAccessibleUpdate cellAccessibleUpdate;
+
     [SerializeField] Color m_defaultColor;
     [SerializeField] Color m_generalColour;
     [SerializeField] Color m_blockedColour;
@@ -93,6 +96,7 @@ public class Cell : MonoBehaviour
     {
         m_accessible = _accessible;
         setDefaultColour(m_accessible ? m_generalColour : m_blockedColour);
+        cellAccessibleUpdate?.Invoke(_accessible);
     }
 
     public void addTower(Tower _tower, bool _blockCell = false)

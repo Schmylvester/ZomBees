@@ -163,6 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89881f2b3317b484db68f5bc625b1e5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TowerManager
+  m_gridManager: {fileID: 1098425202}
   m_manaManager: {fileID: 951839283}
   m_preparedTowers:
   - name: Standard
@@ -1424,6 +1425,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7cb4428f7e79304ca6fafa0b3cd6157, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Grids
+  m_enemyManager: {fileID: 1722978347}
+  m_pathfinder: {fileID: 1098425203}
   m_cellObject: {fileID: 6841442451829236354, guid: 7b6975f308d683647b56a48878e35524, type: 3}
   m_gridSize: 10
   m_baseSize: 1

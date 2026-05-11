@@ -164,7 +164,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52ca7b5b920ed7546834d4fa24ed2b72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelDesignManager
-  m_pathfinder: {fileID: 65708609}
   m_gridManager: {fileID: 1098425202}
 --- !u!114 &65708609
 MonoBehaviour:
@@ -499,8 +498,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7cb4428f7e79304ca6fafa0b3cd6157, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Grids
+  m_pathfinder: {fileID: 65708609}
   m_cellObject: {fileID: 6841442451829236354, guid: 7b6975f308d683647b56a48878e35524, type: 3}
-  m_pathfinder: {fileID: 0}
   m_gridSize: 10
   m_baseSize: 1
   m_grid: {fileID: 1098425201}
