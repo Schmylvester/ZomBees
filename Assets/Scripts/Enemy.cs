@@ -24,6 +24,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] GameObject m_healthBarPrefab;
     // I avoid getting within this distance of another ant
     [SerializeField] float m_politeness;
+    [SerializeField] float m_maxSpriteOffset;
+    ConflictResolutionManager m_conflictResolutionManager;
     Transform m_healthBar;
     ResourceManager m_healthManager;
     List<Cell> m_path = new();
@@ -49,6 +51,15 @@ public class Enemy : MonoBehaviour
         m_healthManager = m_healthBar.GetComponent<ResourceManager>();
         m_healthManager.setInitResource(m_stats.health);
         m_healthManager.onResourceEmpty += defeat;
+
+        var direction = new Vector3(Random.value - 0.5f, Random.value - 0.5f).normalized;
+        var offset = direction * m_maxSpriteOffset;
+        m_spriteRenderer.transform.position += offset;
+    }
+
+    public void initConflictResolution(ConflictResolutionManager _res)
+    {
+        m_conflictResolutionManager = _res;
     }
 
     public void initStats(IEnemyStats _stats)
@@ -78,26 +89,18 @@ public class Enemy : MonoBehaviour
         {
             return;
         }
-        var target = m_path[0].transform.position;
-        var distanceToTarget = Vector3.Distance(transform.position, target);
+        var distanceToTarget = getDistanceToCurrentTargetCell();
         bool wait = false;
         foreach (var other in m_others)
         {
             if (Vector3.Distance(transform.position, other.transform.position) < m_politeness)
             {
-                var otherDistanceToTarget = Vector3.Distance(other.transform.position, target);
-                if (otherDistanceToTarget < distanceToTarget) {
-                    wait = true;
-                    break;
-                }
-                if (otherDistanceToTarget == distanceToTarget)
-                {
-                    wait = Random.value < 0.5f;
-                }
+                wait = !m_conflictResolutionManager.resolveEnemyConflict(this, other);
             }
         }
         if (!wait)
         {
+            var target = m_path[0].transform.position;
             transform.position += (target - transform.position).normalized * m_stats.moveSpeed * Time.deltaTime;
         }
         if (distanceToTarget < m_stats.moveSpeed * Time.deltaTime)
@@ -142,5 +145,15 @@ public class Enemy : MonoBehaviour
         m_healthManager.onResourceEmpty -= defeat;
         if (m_healthBar)
             Destroy(m_healthBar.gameObject);
+    }
+
+    public float getDistanceToCurrentTargetCell()
+    {
+        if (m_path.Count == 0)
+        {
+            return 0;
+        }
+        var target = m_path[0].transform.position;
+        return Vector3.Distance(transform.position, target);
     }
 }

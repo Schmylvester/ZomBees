@@ -2299,6 +2299,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1722978346}
   - component: {fileID: 1722978347}
+  - component: {fileID: 1722978348}
   m_Layer: 0
   m_Name: EnemyManager
   m_TagString: Untagged
@@ -2333,6 +2334,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51b71daa41c9bc84ba7d7606a3709bfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
+  m_conflictResolutionManager: {fileID: 1722978348}
   m_enemyInfoPanel: {fileID: 1128533082}
   m_stats:
   - name: Debug bug
@@ -2355,11 +2357,26 @@ MonoBehaviour:
     health: 100
     spriteIndex: 0
     damage: 1
-    yield: 3
+    yield: 2
   m_enemyPrefab: {fileID: 5929345926524417063, guid: 3cced0f369bfc7a43832cf578d076915, type: 3}
   m_gridManager: {fileID: 1098425202}
   m_pathfinder: {fileID: 1098425203}
   m_manaManager: {fileID: 951839283}
+--- !u!114 &1722978348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1722978345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b06a3ec487082e4ba98625a3dab4550, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ConflictResolutionManager
+  m_speedWeight: 0
+  m_valueWeight: 1
+  m_distanceWeight: 0
 --- !u!1 &1736882682
 GameObject:
   m_ObjectHideFlags: 0

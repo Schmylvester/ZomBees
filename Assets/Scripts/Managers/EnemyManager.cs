@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 public class EnemyManager : MonoBehaviour
 {
+    [SerializeField] ConflictResolutionManager m_conflictResolutionManager;
     [SerializeField] EnemyInfoPanel m_enemyInfoPanel;
     [SerializeField] IEnemyStats[] m_stats;
     [SerializeField] GameObject m_enemyPrefab = null;
@@ -19,14 +20,7 @@ public class EnemyManager : MonoBehaviour
         for (int i = 0; i < m_enemyCount; ++i) {
             if (m_enemies.Count == i)
             {
-                var instance = Instantiate(m_enemyPrefab, transform).GetComponent<Enemy>();
-                instance.gameObject.name = "Enemy " + i;
-                foreach (var enemy in m_enemies)
-                {
-                    enemy.addOther(instance, true);
-                }
-                m_enemies.Add(instance);
-                m_enemies[i].onDefeat += enemyDefeated;
+                addEnemy();
             }
             if (!m_enemies[i].active)
             {
@@ -40,6 +34,19 @@ public class EnemyManager : MonoBehaviour
                 m_enemies[i].active = true;
             }
         }
+    }
+
+    void addEnemy()
+    {
+        var instance = Instantiate(m_enemyPrefab, transform).GetComponent<Enemy>();
+        foreach (var enemy in m_enemies)
+        {
+            enemy.addOther(instance, true);
+        }
+        instance.onDefeat += enemyDefeated;
+        instance.gameObject.name = "Enemy " + m_enemies.Count;
+        instance.initConflictResolution(m_conflictResolutionManager);
+        m_enemies.Add(instance);
     }
 
     void enemyDefeated(IEnemyStats _enemy)
