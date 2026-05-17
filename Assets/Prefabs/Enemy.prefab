@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   m_healthBarOffset: -0.12
   m_spriteRenderer: {fileID: 5207072085372076921}
+  m_animationController: {fileID: 5748933087847539650}
   m_healthBarPrefab: {fileID: 2187881676331973139, guid: a49721bf9ac82444398af1d64d2d7055, type: 3}
   m_politeness: 0.2
   m_maxSpriteOffset: 0.05
@@ -60,6 +61,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2237810711433912671}
   - component: {fileID: 5207072085372076921}
+  - component: {fileID: 5748933087847539650}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -141,3 +143,25 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!95 &5748933087847539650
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7543476586486302555}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7665fc5052c04e148ab9ae0d39bddd28, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

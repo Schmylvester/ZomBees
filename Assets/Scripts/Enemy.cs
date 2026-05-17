@@ -21,6 +21,7 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] float m_healthBarOffset;
     [SerializeField] SpriteRenderer m_spriteRenderer;
+    [SerializeField] Animator m_animationController;
     [SerializeField] GameObject m_healthBarPrefab;
     // I avoid getting within this distance of another ant
     [SerializeField] float m_politeness;
@@ -105,12 +106,32 @@ public class Enemy : MonoBehaviour
         }
         if (distanceToTarget < m_stats.moveSpeed * Time.deltaTime)
         {
-            m_path.RemoveAt(0);
-            if (m_path.Count == 0)
+            arriveAtTargetCell();
+        }
+    }
+
+    void arriveAtTargetCell()
+    {
+        var prevTargetPos = m_path[0].transform.position;
+        m_path.RemoveAt(0);
+        if (m_path.Count == 0)
+        {
+            GameManager.instance.playerHealthManager.reduceResource(m_stats.damage, true);
+            active = false;
+        }
+        else
+        {
+            var newTargetPos = m_path[0].transform.position;
+            m_spriteRenderer.flipX = newTargetPos.x > prevTargetPos.x;
+            var yMove = 0;
+            if (newTargetPos.y > prevTargetPos.y)
             {
-                GameManager.instance.playerHealthManager.reduceResource(m_stats.damage, true);
-                active = false;
+                yMove = 1;
+            } else if (newTargetPos.y < prevTargetPos.y)
+            {
+                yMove = -1;
             }
+            m_animationController.SetInteger("yMove", yMove);
         }
     }
 
