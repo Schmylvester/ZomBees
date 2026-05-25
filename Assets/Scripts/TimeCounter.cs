@@ -65,19 +65,25 @@ public class TimeCounter : MonoBehaviour
             m_scaleCounter.transform.localScale = new Vector3(x, y, 1);
         }
 
-        if (!m_inWarningRange)
+        checkWarningRange();
+    }
+
+    void checkWarningRange()
+    {
+        if (m_inWarningRange)
         {
-            if (m_totalTime - m_count < m_warningLevel)
+            return;
+        }
+        if (m_totalTime - m_count < m_warningLevel)
+        {
+            m_inWarningRange = true;
+            if (m_scaleCounter)
             {
-                m_inWarningRange = true;
-                if (m_scaleCounter)
-                {
-                    m_scaleCounter.color = m_warningColour;
-                }
-                if (m_textCounter)
-                {
-                    m_textCounter.color = m_warningColour;
-                }
+                m_scaleCounter.color = m_warningColour;
+            }
+            if (m_textCounter)
+            {
+                m_textCounter.color = m_warningColour;
             }
         }
     }
