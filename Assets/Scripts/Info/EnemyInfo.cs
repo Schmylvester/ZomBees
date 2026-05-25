@@ -14,6 +14,7 @@ public class EnemyInfo : UIInfo
                 new() { icon = "moveSpeed", value = m_enemy.moveSpeed.ToString() },
                 new() { icon = "health", value = m_enemy.health.ToString() },
                 new() { icon = "money", value = m_enemy.yield.ToString() },
+                new() { icon = "power", value = m_enemy.damage.ToString() },
             }
         };
     }

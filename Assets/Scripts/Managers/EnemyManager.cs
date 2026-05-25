@@ -9,7 +9,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] GameObject m_enemyPrefab = null;
     [SerializeField] GridManager m_gridManager = null;
     [SerializeField] Pathfinder m_pathfinder = null;
-    [SerializeField] ResourceManager m_manaManager;
+    [SerializeField] PlayerCashManager m_cashManager;
     List<Enemy> m_enemies = new();
     public List<Enemy> enemies { get { return m_enemies; } }
     int m_enemyCount;
@@ -51,7 +51,7 @@ public class EnemyManager : MonoBehaviour
 
     void enemyDefeated(IEnemyStats _enemy)
     {
-        m_manaManager.addResource(_enemy.yield);
+        m_cashManager.updateCash(_enemy.yield);
     }
 
     public void setEnemyCount(int _count)

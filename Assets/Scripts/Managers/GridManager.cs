@@ -159,7 +159,7 @@ public class GridManager : MonoBehaviour
     void cellAccessibilityUpdate(Cell _cell, bool _accessible)
     {
         identifyEssentialCells();
-        if (!_accessible)
+        if (!_accessible && m_enemyManager != null)
         {
             m_enemyManager.checkFindAlternativePaths(_cell);
         }

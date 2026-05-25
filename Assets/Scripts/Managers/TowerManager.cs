@@ -12,7 +12,7 @@ struct IPreparedTowers
 public class TowerManager : MonoBehaviour
 {
     [SerializeField] GridManager m_gridManager;
-    [SerializeField] ResourceManager m_manaManager;
+    [SerializeField] PlayerCashManager m_cashManager;
     [SerializeField] IPreparedTowers[] m_preparedTowers;
     [SerializeField] GameObject m_towerPrefab;
 
@@ -27,7 +27,7 @@ public class TowerManager : MonoBehaviour
     {
         if (canPlaceTower(_cell, _tower))
         {
-            m_manaManager.reduceResource(m_preparedTowers[_tower].stats.cost);
+            m_cashManager.updateCash(-m_preparedTowers[_tower].stats.cost);
             var instance = Instantiate(m_towerPrefab, transform);
             var tower = instance.GetComponent<Tower>();
             tower.initTowerStats(m_preparedTowers[_tower].stats);
@@ -53,9 +53,9 @@ public class TowerManager : MonoBehaviour
             GameManager.instance.infoManager.overrideInfo("Can't place tower here", 2f, Color.red);
             return false;
         }
-       if (!m_manaManager.canAfford(m_preparedTowers[_tower].stats.cost))
+       if (!m_cashManager.canAfford(m_preparedTowers[_tower].stats.cost))
         {
-            GameManager.instance.infoManager.overrideInfo("Insufficient mana", 2f, Color.red);
+            GameManager.instance.infoManager.overrideInfo("Can't afford", 2f, Color.red);
             return false;
         }
 
