@@ -17,6 +17,10 @@ public class CellInfo : Info
         {
             return new IInfo { name = "The Palace", description = "If you allow too many ants to reach here, all will be lost." };
         }
+        if (m_cell.isSpawn)
+        {
+            return new IInfo { name = "Spawn cell", description = "Enemies come from here." };
+        }
         return new IInfo { name = "Honeycomb", description = "Just a regular part of the hive, place towers here." };
     }
 }

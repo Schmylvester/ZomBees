@@ -30,6 +30,8 @@ public class Cell : MonoBehaviour
     List<Cell> m_neighbours = new();
     bool m_accessible = true;
     public bool accessible { get  { return m_accessible; } }
+    bool m_spawn = false;
+    public bool isSpawn { get { return m_spawn; } }
 
     private void Awake()
     {
@@ -84,11 +86,13 @@ public class Cell : MonoBehaviour
 
     public void setSpawnCell()
     {
+        m_spawn = true;
         setDefaultColour(m_spawnColour);
     }
 
     public void unsetSpawnCell()
     {
+        m_spawn = false;
         setDefaultColour(m_generalColour);
     }
 

@@ -66,6 +66,8 @@ public class Enemy : MonoBehaviour
     public void initStats(IEnemyStats _stats)
     {
         m_stats = _stats;
+
+        // instead of this, we should add component for the appt animation controller
         m_spriteRenderer.sprite = GameManager.instance.spriteManager.getEnemySprite(m_stats.spriteIndex);
         if (m_healthManager)
             m_healthManager.setInitResource(m_stats.health);

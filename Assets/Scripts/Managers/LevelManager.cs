@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [System.Serializable]
@@ -25,6 +26,9 @@ public struct IDifficultyData
 
 public class LevelManager : MonoBehaviour
 {
+    [SerializeField] GameObject m_endSetupButton;
+    [SerializeField] TimeCounter m_setupTimer;
+    [SerializeField] float m_defaultSetupTime = 90;
     [SerializeField] GridManager m_gridManager;
     [SerializeField] EnemyManager m_enemyManager;
     [SerializeField] string m_level;
@@ -32,6 +36,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField] IDifficultyData m_difficulty;
     int m_currentDifficultyScale = 0;
     float m_difficultyScaleTimer = 0;
+
+    bool m_levelStarted = false;
 
     private void Start()
     {
@@ -68,11 +74,16 @@ public class LevelManager : MonoBehaviour
             initRoster[i] = m_difficulty.fullRoster[i];
         }
         m_enemyManager.updateEnemyRoster(initRoster);
-        m_enemyManager.setEnemyCount(m_difficulty.enemyCount);
+        m_enemyManager.setEnemyCount(0);
+        m_setupTimer.init(m_defaultSetupTime, ECountDirection.Down);
+        m_setupTimer.timeUp += startLevel;
     }
 
     private void Update()
     {
+	if (!m_levelStarted) {
+        return;
+    }
         m_difficultyScaleTimer += Time.deltaTime;
         if (m_currentDifficultyScale < m_difficulty.difficultyIncrementOrder.Length)
         {
@@ -114,5 +125,17 @@ public class LevelManager : MonoBehaviour
         {
             Debug.Log("Level clear");
         }
+    }
+
+    public void startLevel()
+    {
+        m_enemyManager.setEnemyCount(m_difficulty.enemyCount);
+        m_levelStarted = true;
+        m_endSetupButton.SetActive(false);
+    }
+
+    private void OnDestroy()
+    {
+        m_setupTimer.timeUp -= startLevel;
     }
 }
