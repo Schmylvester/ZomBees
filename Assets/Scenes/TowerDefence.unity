@@ -127,22 +127,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 351303635}
     m_Modifications:
-    - target: {fileID: 1858999273509922592, guid: 6dceca8fbb881264fb9eeb7c15bc867b, type: 3}
-      propertyPath: m_Color.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1858999273509922592, guid: 6dceca8fbb881264fb9eeb7c15bc867b, type: 3}
-      propertyPath: m_Color.g
-      value: 0.1283899
-      objectReference: {fileID: 0}
-    - target: {fileID: 1858999273509922592, guid: 6dceca8fbb881264fb9eeb7c15bc867b, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1858999273509922592, guid: 6dceca8fbb881264fb9eeb7c15bc867b, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3014217362664833022, guid: 6dceca8fbb881264fb9eeb7c15bc867b, type: 3}
       propertyPath: m_Name
       value: Projectile (7)
@@ -312,22 +296,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 351303635}
     m_Modifications:
-    - target: {fileID: 1858999273509922592, guid: 6dceca8fbb881264fb9eeb7c15bc867b, type: 3}
-      propertyPath: m_Color.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1858999273509922592, guid: 6dceca8fbb881264fb9eeb7c15bc867b, type: 3}
-      propertyPath: m_Color.g
-      value: 0.1283899
-      objectReference: {fileID: 0}
-    - target: {fileID: 1858999273509922592, guid: 6dceca8fbb881264fb9eeb7c15bc867b, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1858999273509922592, guid: 6dceca8fbb881264fb9eeb7c15bc867b, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3014217362664833022, guid: 6dceca8fbb881264fb9eeb7c15bc867b, type: 3}
       propertyPath: m_Name
       value: Projectile
@@ -792,22 +760,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 351303635}
     m_Modifications:
-    - target: {fileID: 1858999273509922592, guid: 6dceca8fbb881264fb9eeb7c15bc867b, type: 3}
-      propertyPath: m_Color.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1858999273509922592, guid: 6dceca8fbb881264fb9eeb7c15bc867b, type: 3}
-      propertyPath: m_Color.g
-      value: 0.1283899
-      objectReference: {fileID: 0}
-    - target: {fileID: 1858999273509922592, guid: 6dceca8fbb881264fb9eeb7c15bc867b, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1858999273509922592, guid: 6dceca8fbb881264fb9eeb7c15bc867b, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3014217362664833022, guid: 6dceca8fbb881264fb9eeb7c15bc867b, type: 3}
       propertyPath: m_Name
       value: Projectile (1)
@@ -2001,22 +1953,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 351303635}
     m_Modifications:
-    - target: {fileID: 1858999273509922592, guid: 6dceca8fbb881264fb9eeb7c15bc867b, type: 3}
-      propertyPath: m_Color.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1858999273509922592, guid: 6dceca8fbb881264fb9eeb7c15bc867b, type: 3}
-      propertyPath: m_Color.g
-      value: 0.1283899
-      objectReference: {fileID: 0}
-    - target: {fileID: 1858999273509922592, guid: 6dceca8fbb881264fb9eeb7c15bc867b, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1858999273509922592, guid: 6dceca8fbb881264fb9eeb7c15bc867b, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3014217362664833022, guid: 6dceca8fbb881264fb9eeb7c15bc867b, type: 3}
       propertyPath: m_Name
       value: Projectile (5)
@@ -2181,22 +2117,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 351303635}
     m_Modifications:
-    - target: {fileID: 1858999273509922592, guid: 6dceca8fbb881264fb9eeb7c15bc867b, type: 3}
-      propertyPath: m_Color.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1858999273509922592, guid: 6dceca8fbb881264fb9eeb7c15bc867b, type: 3}
-      propertyPath: m_Color.g
-      value: 0.1283899
-      objectReference: {fileID: 0}
-    - target: {fileID: 1858999273509922592, guid: 6dceca8fbb881264fb9eeb7c15bc867b, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1858999273509922592, guid: 6dceca8fbb881264fb9eeb7c15bc867b, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3014217362664833022, guid: 6dceca8fbb881264fb9eeb7c15bc867b, type: 3}
       propertyPath: m_Name
       value: Projectile (2)
@@ -2827,22 +2747,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 351303635}
     m_Modifications:
-    - target: {fileID: 1858999273509922592, guid: 6dceca8fbb881264fb9eeb7c15bc867b, type: 3}
-      propertyPath: m_Color.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1858999273509922592, guid: 6dceca8fbb881264fb9eeb7c15bc867b, type: 3}
-      propertyPath: m_Color.g
-      value: 0.1283899
-      objectReference: {fileID: 0}
-    - target: {fileID: 1858999273509922592, guid: 6dceca8fbb881264fb9eeb7c15bc867b, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1858999273509922592, guid: 6dceca8fbb881264fb9eeb7c15bc867b, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3014217362664833022, guid: 6dceca8fbb881264fb9eeb7c15bc867b, type: 3}
       propertyPath: m_Name
       value: Projectile (8)
@@ -3596,22 +3500,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 351303635}
     m_Modifications:
-    - target: {fileID: 1858999273509922592, guid: 6dceca8fbb881264fb9eeb7c15bc867b, type: 3}
-      propertyPath: m_Color.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1858999273509922592, guid: 6dceca8fbb881264fb9eeb7c15bc867b, type: 3}
-      propertyPath: m_Color.g
-      value: 0.1283899
-      objectReference: {fileID: 0}
-    - target: {fileID: 1858999273509922592, guid: 6dceca8fbb881264fb9eeb7c15bc867b, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1858999273509922592, guid: 6dceca8fbb881264fb9eeb7c15bc867b, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3014217362664833022, guid: 6dceca8fbb881264fb9eeb7c15bc867b, type: 3}
       propertyPath: m_Name
       value: Projectile (9)
@@ -3913,22 +3801,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 351303635}
     m_Modifications:
-    - target: {fileID: 1858999273509922592, guid: 6dceca8fbb881264fb9eeb7c15bc867b, type: 3}
-      propertyPath: m_Color.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1858999273509922592, guid: 6dceca8fbb881264fb9eeb7c15bc867b, type: 3}
-      propertyPath: m_Color.g
-      value: 0.1283899
-      objectReference: {fileID: 0}
-    - target: {fileID: 1858999273509922592, guid: 6dceca8fbb881264fb9eeb7c15bc867b, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1858999273509922592, guid: 6dceca8fbb881264fb9eeb7c15bc867b, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3014217362664833022, guid: 6dceca8fbb881264fb9eeb7c15bc867b, type: 3}
       propertyPath: m_Name
       value: Projectile (3)
@@ -4396,22 +4268,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 351303635}
     m_Modifications:
-    - target: {fileID: 1858999273509922592, guid: 6dceca8fbb881264fb9eeb7c15bc867b, type: 3}
-      propertyPath: m_Color.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1858999273509922592, guid: 6dceca8fbb881264fb9eeb7c15bc867b, type: 3}
-      propertyPath: m_Color.g
-      value: 0.1283899
-      objectReference: {fileID: 0}
-    - target: {fileID: 1858999273509922592, guid: 6dceca8fbb881264fb9eeb7c15bc867b, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1858999273509922592, guid: 6dceca8fbb881264fb9eeb7c15bc867b, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3014217362664833022, guid: 6dceca8fbb881264fb9eeb7c15bc867b, type: 3}
       propertyPath: m_Name
       value: Projectile (4)
@@ -4713,22 +4569,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 351303635}
     m_Modifications:
-    - target: {fileID: 1858999273509922592, guid: 6dceca8fbb881264fb9eeb7c15bc867b, type: 3}
-      propertyPath: m_Color.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1858999273509922592, guid: 6dceca8fbb881264fb9eeb7c15bc867b, type: 3}
-      propertyPath: m_Color.g
-      value: 0.1283899
-      objectReference: {fileID: 0}
-    - target: {fileID: 1858999273509922592, guid: 6dceca8fbb881264fb9eeb7c15bc867b, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1858999273509922592, guid: 6dceca8fbb881264fb9eeb7c15bc867b, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3014217362664833022, guid: 6dceca8fbb881264fb9eeb7c15bc867b, type: 3}
       propertyPath: m_Name
       value: Projectile (6)
