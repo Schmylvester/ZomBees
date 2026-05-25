@@ -6,12 +6,19 @@ using static UnityEngine.GraphicsBuffer;
 public struct IEnemyStats
 {
     public string name;
+    // what shows in the info box when I am hovered
     public string description;
+    // how fast I move
     public float moveSpeed;
+    // how much health I have
     public int health;
+    // index of the sprite in the sprite manager
     public int spriteIndex;
+    // damage I do to the palace/tower when I reach it
     public int damage;
+    // money I drop on death
     public int yield;
+    // percentage of non-pierce damage that I resist
     public int armour;
 }
 
@@ -27,6 +34,8 @@ public class Enemy : MonoBehaviour
     // I avoid getting within this distance of another ant
     [SerializeField] float m_politeness;
     [SerializeField] float m_maxSpriteOffset;
+    [SerializeField] float m_deathTime = 0;
+    float m_deathTimer;
     ConflictResolutionManager m_conflictResolutionManager;
     Transform m_healthBar;
     ResourceManager m_healthManager;
@@ -58,7 +67,7 @@ public class Enemy : MonoBehaviour
         syncHealthBar();
         m_healthManager = m_healthBar.GetComponent<ResourceManager>();
         m_healthManager.setInitResource(m_stats.health);
-        m_healthManager.onResourceEmpty += defeat;
+        m_healthManager.onResourceEmpty += markForDeath;
 
         var direction = new Vector3(Random.value - 0.5f, Random.value - 0.5f).normalized;
         var offset = direction * m_maxSpriteOffset;
@@ -78,6 +87,7 @@ public class Enemy : MonoBehaviour
         m_spriteRenderer.sprite = GameManager.instance.spriteManager.getEnemySprite(m_stats.spriteIndex);
         if (m_healthManager)
             m_healthManager.setInitResource(m_stats.health);
+        m_deathTimer = -1;
     }
 
     public void addOther(Enemy other, bool reciprocate = false)
@@ -94,6 +104,15 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
+        if (markedForDeath())
+        {
+            m_deathTimer -= Time.deltaTime;
+            if (m_deathTimer < 0)
+            {
+                defeat();
+            }
+            return;
+        }
         syncHealthBar();
         if (m_path.Count == 0)
         {
@@ -149,6 +168,19 @@ public class Enemy : MonoBehaviour
         m_healthBar.transform.position = Camera.main.WorldToScreenPoint(transform.position + (Vector3.up * m_healthBarOffset));
     }
 
+    void markForDeath()
+    {
+        if (!markedForDeath())
+        {
+            m_deathTimer = m_deathTime;
+        }
+    }
+
+    public bool markedForDeath()
+    {
+        return m_deathTimer >= 0;
+    }
+
     void defeat()
     {
         onDefeat?.Invoke(m_stats);
@@ -165,14 +197,14 @@ public class Enemy : MonoBehaviour
             m_path = _pathfinder.findPath(m_path[0], (c) => c.getBase(), _cell);
             if (m_path.Count == 0)
             {
-                defeat();
+                markForDeath();
             }
         }
     }
 
     private void OnDestroy()
     {
-        m_healthManager.onResourceEmpty -= defeat;
+        m_healthManager.onResourceEmpty -= markForDeath;
         if (m_healthBar)
             Destroy(m_healthBar.gameObject);
     }

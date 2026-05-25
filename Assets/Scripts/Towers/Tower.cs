@@ -4,11 +4,17 @@ using UnityEngine;
 public struct ITowerStats
 {
     public string name;
+    // what shows in the info box when I am hovered
     public string description;
+    // distance that an enemy must be within for me to fire at them
     public float range;
+    // shots per second
     public float fireRate;
+    // amount of damage done to an enemy with 0 armour
     public int power;
+    // index of the sprite in the sprite manager
     public int spriteIndex;
+    // if this tower is in a cell, enemies can not cross it
     public bool blocksCell;
     public int cost;
     // percetage of damage that ignores armour
@@ -55,7 +61,6 @@ public class Tower : MonoBehaviour
 {
     [SerializeField] SpriteRenderer m_spriteRenderer;
     [SerializeField] SpriteRenderer m_rangeIndicator;
-    [SerializeField] Projectile m_projectile;
     [SerializeField] bool m_active = false;
     ITowerStats m_stats;
     float m_lastFire = 0f;
@@ -83,25 +88,28 @@ public class Tower : MonoBehaviour
                     var bDist = Vector3.Distance(transform.position, b.transform.position);
                     return aDist < bDist ? -1 : 1;
                 });
-                if (enemies[0])
-                {
-                    if (Vector3.Distance(enemies[0].transform.position, transform.position) <= m_stats.range)
+                foreach (var enemy in enemies) {
+                    if (!enemy.markedForDeath())
                     {
-                        m_targetEnemy = enemies[0];
+                        if (Vector3.Distance(enemy.transform.position, transform.position) <= m_stats.range)
+                        {
+                            m_targetEnemy = enemy;
+                        }
+                        break;
                     }
                 }
             }
         }
         if (m_targetEnemy)
         {
-            if (Vector3.Distance(m_targetEnemy.transform.position, transform.position) > m_stats.range)
+            if (Vector3.Distance(m_targetEnemy.transform.position, transform.position) > m_stats.range || m_targetEnemy.markedForDeath())
             {
                 m_targetEnemy = null;
             } else
             {
                 if (m_lastFire >= 1f / m_stats.fireRate)
                 {
-                    StartCoroutine(m_projectile.fire(m_targetEnemy.transform));
+                    StartCoroutine(GameManager.instance.projectilePool.getFreeProjectile().fire(transform.position, m_targetEnemy.transform.position));
                     m_targetEnemy.takeDamage(m_stats.power, m_stats.pierce);
                     m_lastFire = 0;
                 }

@@ -47,11 +47,14 @@ public class StatIcons : MonoBehaviour
                     }
                 } else
                 {
-                    m_statValueIcons[valuedIndex].enabled = true;
-                    m_statValueIcons[valuedIndex].sprite = sprite;
-                    m_statValues[valuedIndex].enabled = true;
-                    m_statValues[valuedIndex].text = stat.value;
-                    valuedIndex++;
+                    if (float.Parse(stat.value) != 0f)
+                    {
+                        m_statValueIcons[valuedIndex].enabled = true;
+                        m_statValueIcons[valuedIndex].sprite = sprite;
+                        m_statValues[valuedIndex].enabled = true;
+                        m_statValues[valuedIndex].text = stat.value;
+                        valuedIndex++;
+                    }
                 }
             }
         }

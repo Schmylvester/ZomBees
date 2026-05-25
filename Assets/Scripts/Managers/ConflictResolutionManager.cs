@@ -8,6 +8,13 @@ public class ConflictResolutionManager : MonoBehaviour
 
     public bool resolveEnemyConflict(Enemy _object, Enemy _subject)
     {
+        if (_object.markedForDeath())
+        {
+            return false;
+        }
+        if (_subject.markedForDeath()) {
+            return true;
+        }
         var speedDiff = _object.stats.moveSpeed - _subject.stats.moveSpeed;
         var valueDiff = _object.stats.yield - _subject.stats.yield;
         // lower distance is better, so do the subtraction in reverse

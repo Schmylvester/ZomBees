@@ -51,6 +51,7 @@ MonoBehaviour:
   m_healthBarPrefab: {fileID: 2187881676331973139, guid: a49721bf9ac82444398af1d64d2d7055, type: 3}
   m_politeness: 0.2
   m_maxSpriteOffset: 0.05
+  m_deathTime: 1
 --- !u!1 &7543476586486302555
 GameObject:
   m_ObjectHideFlags: 0

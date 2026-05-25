@@ -1,10 +1,19 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+public struct IStatChange
+{
+    public int value;
+    public float percentage;
+}
+
 public class ResourceManager : MonoBehaviour
 {
     public delegate void ResourceEmpty();
     public ResourceEmpty onResourceEmpty;
+
+    public delegate void ResourceChange(IStatChange _newVal);
+    public ResourceChange onResourceChange;
 
     [SerializeField] Transform m_resourceBar;
 
@@ -48,6 +57,20 @@ public class ResourceManager : MonoBehaviour
             reduction = Mathf.Max(reduction, 1);
         }
         m_currentResource -= reduction;
+        updateResourceValue(-reduction);
+    }
+
+    public void addResource(int increment, bool alwaysValue = false)
+    {
+        if (alwaysValue) {
+            increment = Mathf.Max(increment, 1);
+        }
+        updateResourceValue(increment);
+    }
+
+    void updateResourceValue(int _mod)
+    {
+        m_currentResource = Mathf.Clamp(m_currentResource + _mod, 0, m_maxResouce);
         if (m_currentResource <= 0)
         {
             m_currentResource = 0;
@@ -59,20 +82,11 @@ public class ResourceManager : MonoBehaviour
             m_currentShowTimer = m_showTime;
             setVisible(true);
         }
-    }
 
-    public void addResource(int increment, bool alwaysValue = false)
-    {
-        if (alwaysValue) {
-            increment = Mathf.Max(increment, 1);
-        }
-        m_currentResource = Mathf.Min(m_currentResource + increment, m_maxResouce);
-
-        if (m_showTime > 0)
-        {
-            m_currentShowTimer = m_showTime;
-            setVisible(true);
-        }
+        onResourceChange?.Invoke(new() {
+            value = m_currentResource,
+            percentage = (float)m_currentResource / m_maxResouce
+        });
     }
 
     public void setInitResource(int _resource)

@@ -166,7 +166,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HealthManager
   m_resourceBar: {fileID: 8407896528227616287}
   m_maxResouce: 100
-  m_showTime: 1.5
+  m_showTime: 1.2
   m_display:
   - {fileID: 8341761711258119495}
   - {fileID: 5249713867476304456}
