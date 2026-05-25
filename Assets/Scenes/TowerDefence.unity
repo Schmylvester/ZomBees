@@ -2279,6 +2279,8 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: af8723400bea6484087c47f48e97e0b4, type: 3}
   - name: moveSpeed
     sprite: {fileID: 21300000, guid: 5307ede52b86f4a448c8991d5bfb5012, type: 3}
+  - name: armour
+    sprite: {fileID: 21300000, guid: 1cc98b31b17b7458d836efb5c510556f, type: 3}
 --- !u!1 &1055936021
 GameObject:
   m_ObjectHideFlags: 0
@@ -4137,6 +4139,7 @@ MonoBehaviour:
     spriteIndex: 0
     damage: 1
     yield: 2
+    armour: 0
   - name: Black ant
     description: Slow and lots of health
     moveSpeed: 0.5
@@ -4144,6 +4147,7 @@ MonoBehaviour:
     spriteIndex: 1
     damage: 1
     yield: 3
+    armour: 0
   - name: Red ant
     description: Fast and low health
     moveSpeed: 0.8
@@ -4151,6 +4155,7 @@ MonoBehaviour:
     spriteIndex: 0
     damage: 1
     yield: 2
+    armour: 0
   m_enemyPrefab: {fileID: 5929345926524417063, guid: 3cced0f369bfc7a43832cf578d076915, type: 3}
   m_gridManager: {fileID: 1098425202}
   m_pathfinder: {fileID: 1098425203}

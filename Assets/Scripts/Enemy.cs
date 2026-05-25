@@ -12,6 +12,7 @@ public struct IEnemyStats
     public int spriteIndex;
     public int damage;
     public int yield;
+    public int armour;
 }
 
 public class Enemy : MonoBehaviour
@@ -38,10 +39,16 @@ public class Enemy : MonoBehaviour
     bool m_active = false;
     public bool active { get { return m_active; } set { m_active = value; } }
 
-    public void takeDamage(int _damage)
+    public void takeDamage(int _power, int pierce)
     {
         if (m_healthManager)
-            m_healthManager.reduceResource(_damage, true);
+        {
+            var untaxableDamage = _power * (pierce / 100f);
+            var taxableDamage = _power - untaxableDamage;
+            var armourMod = (100f - m_stats.armour) / 100;
+            var damage = Mathf.Max((int)(untaxableDamage + (taxableDamage * armourMod)), 1);
+            m_healthManager.reduceResource(damage, true);
+        }
     }
 
     private void Start()

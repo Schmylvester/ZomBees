@@ -11,6 +11,44 @@ public struct ITowerStats
     public int spriteIndex;
     public bool blocksCell;
     public int cost;
+    // percetage of damage that ignores armour
+    public int pierce;
+
+    public IInfo getInfo()
+    {
+        return new IInfo
+        {
+            name = name,
+            description = description,
+            stats = new IStatDisplay[]
+            {
+                new() {
+                    icon = "range",
+                    value = range.ToString(),
+                },
+                new() {
+                    icon = "power",
+                    value = power.ToString(),
+                },
+                new() {
+                    icon = "fireRate",
+                    value = fireRate.ToString(),
+                },
+                new() {
+                    icon = "money",
+                    value = cost.ToString(),
+                },
+                new() {
+                    icon = "blocksCell",
+                    value = blocksCell.ToString(),
+                },
+                new() {
+                    icon = "pierce",
+                    value = pierce.ToString(),
+                }
+            }
+        };
+    }
 }
 
 public class Tower : MonoBehaviour
@@ -64,7 +102,7 @@ public class Tower : MonoBehaviour
                 if (m_lastFire >= 1f / m_stats.fireRate)
                 {
                     StartCoroutine(m_projectile.fire(m_targetEnemy.transform));
-                    m_targetEnemy.takeDamage(m_stats.power);
+                    m_targetEnemy.takeDamage(m_stats.power, m_stats.pierce);
                     m_lastFire = 0;
                 }
             }
@@ -79,33 +117,7 @@ public class Tower : MonoBehaviour
 
     public IInfo getTowerInfo()
     {
-        return new IInfo {
-            name = m_stats.name,
-            description = m_stats.description,
-            stats = new IStatDisplay[]
-            {
-                new() {
-                    icon = "range",
-                    value = m_stats.range.ToString(),
-                },
-                new() {
-                    icon = "power",
-                    value = m_stats.power.ToString(),
-                },
-                new() {
-                    icon = "fireRate",
-                    value = m_stats.fireRate.ToString(),
-                },
-                new() {
-                    icon = "money",
-                    value = m_stats.cost.ToString(),
-                },
-                new() {
-                    icon = "blocksCell",
-                    value = m_stats.blocksCell.ToString(),
-                }
-            }
-        };
+        return m_stats.getInfo();
     }
 
     public void addHighlight()
