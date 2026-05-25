@@ -43,8 +43,8 @@ public class TowerUIInfo : UIInfo
                     value = m_tower.fireRate.ToString(),
                 },
                 new() {
-                    icon = "range",
-                    value = m_tower.range.ToString(),
+                    icon = "money",
+                    value = m_tower.cost.ToString(),
                 },
                 new() {
                     icon = "blocksCell",

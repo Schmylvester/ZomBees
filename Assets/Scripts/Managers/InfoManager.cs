@@ -8,6 +8,7 @@ public class InfoManager : MonoBehaviour
     [SerializeField] Color m_defaultTextColour;
     [SerializeField] TMP_Text m_title;
     [SerializeField] TMP_Text m_description;
+    [SerializeField] StatIcons m_statIcons;
     UIInfo[] m_highlightableUI;
     UIInfo m_highlightedUI;
     string m_overriddenInfo = "";
@@ -44,7 +45,7 @@ public class InfoManager : MonoBehaviour
             }
             return;
         }
-        var infoText = new IInfo();
+        var infoData = new IInfo();
         List<RaycastHit2D> collisions = new();
         var collision = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue()));
         if (collision)
@@ -52,19 +53,21 @@ public class InfoManager : MonoBehaviour
             var info = collision.collider.GetComponent<Info>();
             if (info)
             {
-                infoText = info.getInfo();
+                infoData = info.getInfo();
             }
         }
 
         if (m_highlightedUI)
         {
-            infoText = m_highlightedUI.getInfo();
+            infoData = m_highlightedUI.getInfo();
         }
 
-        if (infoText.name != m_title.text)
+        if (infoData.name != m_title.text)
         {
-            m_title.text = infoText.name;
-            m_description.text = infoText.description;
+            m_title.text = infoData.name;
+            m_description.text = infoData.description;
+
+            m_statIcons.setStatIcons(infoData.stats);
         }
     }
 

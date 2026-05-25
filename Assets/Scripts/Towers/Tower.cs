@@ -97,8 +97,8 @@ public class Tower : MonoBehaviour
                     value = m_stats.fireRate.ToString(),
                 },
                 new() {
-                    icon = "range",
-                    value = m_stats.range.ToString(),
+                    icon = "money",
+                    value = m_stats.cost.ToString(),
                 },
                 new() {
                     icon = "blocksCell",
